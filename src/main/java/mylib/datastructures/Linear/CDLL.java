@@ -5,23 +5,23 @@ import mylib.datastructures.nodes.DNode;
 public class CDLL extends DLL{
     private DNode head;
     private DNode tail;
-    private int size;
+    private int tracker;
 
     public CDLL(){
         head = null;
         tail = null;
-        size = 0;
+        tracker = 0;
     }
 
     public CDLL(DNode head){
         this.head = head;
         tail = null;
-        size = 1;
+        tracker = 1;
         DNode current = head;
         if(current.getNext() != null) {
             while (current.getNext().getData() != head.getData()) {
                 current = current.getNext();
-                size++;
+                tracker++;
             }
         }
         current.setNext(this.head);
@@ -41,7 +41,7 @@ public class CDLL extends DLL{
             node.setPrevious(tail);
             head = node;
         }
-        size++;
+        tracker++;
     }
 
     @Override
@@ -56,17 +56,17 @@ public class CDLL extends DLL{
             head.setPrevious(node);
             tail = node;
         }
-        size++;
+        tracker++;
     }
 
     @Override
     public void Insert(DNode node, int position) {
-        if (position < 1 || position > size + 1) {
+        if (position < 1 || position > tracker + 1) {
             throw new IndexOutOfBoundsException();
         }
         if (position == 1) {
             InsertHead(node);
-        } else if (position == size + 1) {
+        } else if (position == tracker + 1) {
             InsertTail(node);
         } else {
             DNode current = head;
@@ -77,7 +77,7 @@ public class CDLL extends DLL{
             current.getNext().setPrevious(node);
             node.setPrevious(current);
             current.setNext(node);
-            size++;
+            tracker++;
         }
     }
 
@@ -103,7 +103,7 @@ public class CDLL extends DLL{
                 tail = node;
             }
         }
-        size++;
+        tracker++;
     }
 
     @Override
@@ -131,7 +131,7 @@ public class CDLL extends DLL{
             head.getNext().setPrevious(tail);
             head = head.getNext();
             tail.setNext(head);
-            size--;
+            tracker--;
         }
     }
 
@@ -147,7 +147,7 @@ public class CDLL extends DLL{
             current.setNext(head);
             tail = current;
             head.setPrevious(tail);
-            size--;
+            tracker--;
         }
     }
 
@@ -163,7 +163,7 @@ public class CDLL extends DLL{
             if(current.getNext().getData() == node.getData()){
                 current.setNext(current.getNext().getNext());
                 current.getNext().setPrevious(current);
-                size--;
+                tracker--;
             }
         }
     }
@@ -210,7 +210,7 @@ public class CDLL extends DLL{
 
     @Override
     public void Print() {
-        System.out.println("List length: " + size);
+        System.out.println("List length: " + tracker);
 
         if (isSorted()) {
             System.out.println("Sorted: Yes");
@@ -238,7 +238,7 @@ public class CDLL extends DLL{
     public void Clear(){
         head = null;
         tail = null;
-        size = 0;
+        tracker = 0;
     }
 }
 
