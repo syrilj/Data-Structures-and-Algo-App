@@ -1,11 +1,5 @@
-import mylib.datastructures.nodes.DNode;
-import mylib.datastructures.Linear.DLL;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
-import mylib.datastructures.nodes.DNode;
-import mylib.datastructures.Linear.DLL;
+import myLib.datastructures.nodes.DNode;
+import myLib.datastructures.Linear.DLL;
 
 public class DLLTest {
     public static void main(String[] args) {

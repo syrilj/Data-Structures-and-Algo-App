@@ -1,9 +1,9 @@
-package mylib.datastructures;
+package myLib.datastructures;
 import java.util.Scanner;
-import mylib.datastructures.Linear.StackLL;
-import mylib.datastructures.nodes.DNode;
-import mylib.datastructures.Linear.*;
-import mylib.datastructures.Linear.DLL;
+import myLib.datastructures.Linear.StackLL;
+import myLib.datastructures.nodes.DNode;
+import myLib.datastructures.Linear.*;
+import myLib.datastructures.Linear.DLL;
 
 public class Main {
     public static void main(String[] args) {
@@ -77,7 +77,7 @@ public class Main {
 
         // Search for a node
         DNode node98 = list18.Search(new DNode(3));
-        System.out.println("Node found: " + node98); // Should output: Node found: mylib.datastructures.nodes.DNode@...
+        System.out.println("Node found: " + node98); // Should output: Node found: nodes.myLib.datastructures.DNode@...
 
         // Delete nodes
         list18.DeleteHead();

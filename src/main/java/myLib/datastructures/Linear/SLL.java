@@ -1,6 +1,6 @@
-package mylib.datastructures.Linear;
+package myLib.datastructures.Linear;
 
-import mylib.datastructures.nodes.DNode;
+import myLib.datastructures.nodes.DNode;
 /**
 
  This class implements a singly linked list that can be used to store integer values.

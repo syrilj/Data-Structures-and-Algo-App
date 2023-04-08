@@ -1,6 +1,6 @@
-package mylib.datastructures.Linear;
+package myLib.datastructures.Linear;
 
-import mylib.datastructures.nodes.DNode;
+import myLib.datastructures.nodes.DNode;
 
 public class CDLL extends DLL{
     private DNode head;
