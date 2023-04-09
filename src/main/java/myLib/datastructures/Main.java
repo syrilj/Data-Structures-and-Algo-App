@@ -11,188 +11,248 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
         int choice = 0;
-        while (choice != 8) {
-            System.out.println("Select a data structure to test:");
-            System.out.println("1. Singly Linked List (SLL)");
-            System.out.println("2. Queue using Linked List (QueueLL)");
-            System.out.println("3. Stack using Linked List (StackLL)");
-            System.out.println("4. Doubly Linked List (DLL)");
-            System.out.println("5. Circular Doubly Linked List (CDLL)");
-            System.out.println("6. Circular Singly Linked List (CSLL)");
-            System.out.println("7. Binary Search Tree (BST)");
-            System.out.println("8. Exit");
+        while (choice != 9) {
+            System.out.println("Select an option:");
+            System.out.println("1. Run all tests");
+            System.out.println("2. Test Singly Linked List (SLL)");
+            System.out.println("3. Test Queue using Linked List (QueueLL)");
+            System.out.println("4. Test Stack using Linked List (StackLL)");
+            System.out.println("5. Test Doubly Linked List (DLL)");
+            System.out.println("6. Test Circular Doubly Linked List (CDLL)");
+            System.out.println("7. Test Circular Singly Linked List (CSLL)");
+            System.out.println("8. Test Binary Search Tree (BST)");
+            System.out.println("9. Exit");
             System.out.print("Enter your choice: ");
             choice = input.nextInt();
 
             switch (choice) {
                 case 1:
+                    System.out.println("Running all tests...");
+                    runAllTests();
+                    break;
+                case 2:
                     System.out.println("Testing Singly Linked List (SLL)");
                     testSLL();
                     break;
-                case 2:
+                case 3:
                     System.out.println("Testing Queue using Linked List (QueueLL)");
                     testQueueLL();
                     break;
-                case 3:
+                case 4:
                     System.out.println("Testing Stack using Linked List (StackLL)");
                     testStackLL();
                     break;
-                case 4:
+                case 5:
                     System.out.println("Testing Doubly Linked List (DLL)");
                     testDLL();
                     break;
-                case 5:
+                case 6:
                     System.out.println("Testing Circular Doubly Linked List (CDLL)");
                     testCDLL();
                     break;
-                case 6:
+                case 7:
                     System.out.println("Testing Circular Singly Linked List (CSLL)");
                     testCSLL();
                     break;
-
-                case 7:
+                case 8:
                     System.out.println("Testing Binary Search Tree(BST)");
                     testBST();
                     break;
-                case 8:
+                case 9:
                     System.out.println("Exiting...");
                     break;
                 default:
                     System.out.println("Invalid choice.");
                     break;
             }
-
         }
         input.close();
     }
 
+    public static void runAllTests() {
+        testSLL();
+        testQueueLL();
+        testStackLL();
+        testDLL();
+        testCDLL();
+        testCSLL();
+        testBST();
+    }
+
     private static void testCSLL() {
         System.out.println("-------------------------------------------------");
-        System.out.println("Running through some functionality testing of CSLL");
+        System.out.println("Running functionality testing of CSLL");
+        CSLL list = new CSLL();
 
+        // Insert nodes at the head and tail of the list
+        list.InsertHead(new DNode(1));
+        list.InsertTail(new DNode(2));
+        list.InsertTail(new DNode(3));
 
-        CSLL list18 = new CSLL();
+        // Print the list
+        list.Print(); // List length: 3 Sorted: Yes List content: 1 -> 2 -> 3
 
-        // Insert nodes
-        list18.InsertHead(new DNode(1));
-        list18.InsertTail(new DNode(2));
-        list18.Insert(new DNode(3), 2);
-        list18.SortedInsert(new DNode(4));
+        // Insert a node at a specific position
+        list.Insert(new DNode(4), 2);
 
-        // Print list
-        list18.Print(); // Should output: List length: 4, Sorted: Yes, List content: 1 -> 2 -> 3 -> 4
+        // Print the list
+        list.Print(); // List length: 4 Sorted: Yes List content: 1 -> 4 -> 2 -> 3
+
+        // Insert a node in sorted order
+        list.SortedInsert(new DNode(0));
+
+        // Print the list
+        list.Print(); // List length: 5 Sorted: Yes List content: 0 -> 1 -> 2 -> 3 -> 4
 
         // Search for a node
-        DNode node98 = list18.Search(new DNode(3));
-        System.out.println("Node found: " + node98); // Should output: Node found: nodes.myLib.datastructures.DNode@...
+        DNode node = list.Search(new DNode(2));
+        System.out.println("Found node: " + node.getData()); // Found node: 2
 
-        // Delete nodes
-        list18.DeleteHead();
-        list18.DeleteTail();
-        list18.Delete(new DNode(2));
+        // Delete nodes from the head and tail of the list
+        list.DeleteHead();
+        list.DeleteTail();
 
-        // Print list
-        list18.Print(); // Should output: List length: 1, Sorted: Yes, List content: 1
-        // Clear list
-        list18.Clear();
-        list18.Print(); // Should output: List length: 0, Sorted: Yes, List content: empty
+        // Print the list
+        list.Print(); // List length: 3 Sorted: Yes List content: 1 -> 2 -> 3
+
+        // Delete a specific node
+        list.Delete(new DNode(2));
+
+        // Print the list
+        list.Print(); // List length: 2 Sorted: Yes List content: 1 -> 3
+
+        // Check if the list is sorted
+        System.out.println("Is the list sorted? " + list.isSorted()); // Is the list sorted? true
+
+        // Sort the list
+        list.Sort();
+
+        // Print the list
+        list.Print(); // List length: 2 Sorted: Yes List content: 1 -> 3
+
+        // Clear the list
+        list.Clear();
+
+        // Print the list
+        list.Print(); // List length: 0 Sorted: Yes List content: empty
         System.out.println("-------------------------------------------------");
-        System.out.println("Finished Running through some functionality testing of CSLL");
+        System.out.println("Finished Running functionality testing of CSLL");
     }
+
+
 
     private static void testCDLL() {
         System.out.println("-------------------------------------------------");
-        System.out.println("Running through some functionality testing of CDLL");
-        CDLL myList = new CDLL();
+        System.out.println("Running functionality testing of CDLL");
+        CDLL list = new CDLL();
 
-        DNode node19 = new DNode(5);
-        DNode node29 = new DNode(10);
-        DNode node39 = new DNode(15);
-        DNode node49 = new DNode(20);
+        // insert nodes into list
+        list.InsertTail(new DNode(10));
+        list.InsertTail(new DNode(20));
+        list.InsertTail(new DNode(30));
+        list.InsertTail(new DNode(40));
+        list.InsertHead(new DNode(5));
+        list.Insert(new DNode(15), 3);
 
-        myList.InsertHead(node19);
-        myList.InsertTail(node29);
-        myList.Insert(node39, 2);
-        myList.SortedInsert(node49);
+        System.out.println("Inserting 5, 10, 15, 20, 30, and 40 into the list...");
 
-        System.out.println("List after insertions:");
-        myList.Print();
+        // print out the list
+        list.Print();
 
-        DNode searchNode = new DNode(15);
-        DNode foundNode8 = myList.Search(searchNode);
-        System.out.println("Search result: " + foundNode8);
+        // delete nodes from list
+        list.DeleteHead();
+        list.DeleteTail();
+        list.Delete(new DNode(15));
 
-        myList.DeleteHead();
-        myList.DeleteTail();
-        myList.Delete(node39);
+        System.out.println("Deleting the head, tail, and node with value 15 from the list...");
 
-        System.out.println("List after deletions:");
-        myList.Print();
+        // print out the updated list
+        list.Print();
+
+        // search for a node in the list
+        DNode searchNode = new DNode(20);
+        DNode foundNode = list.Search(searchNode);
+
+        if (foundNode != null) {
+            System.out.println("Found node with value " + searchNode.getData() + " in the list.");
+        } else {
+            System.out.println("Did not find node with value " + searchNode.getData() + " in the list.");
+        }
+
+        // sort the list
+        list.Sort();
 
         System.out.println("Sorting the list...");
-        myList.Sort();
 
-        System.out.println("List after sorting:");
-        myList.Print();
+        // print out the sorted list
+        list.Print();
         System.out.println("-------------------------------------------------");
-        System.out.println("Running through some functionality testing of CDLL");
+        System.out.println("Running functionality testing of CDLL");
 
     }
 
     private static void testDLL() {
 
         System.out.println("-------------------------------------------------");
-        System.out.println("\nRunning through some functionality testing of DLL");
+        System.out.println("Running functionality testing of DLL");
 
-        // Create a new DLL
+// Create a new DLL
         DLL dll = new DLL();
         System.out.println("New DLL created.");
 
-        // Insert nodes at head
+// Insert nodes at head
         dll.InsertHead(new DNode(3));
-        System.out.println("Inserted node with data = 3 at head.");
+        System.out.println("Inserted node with data = 3 at the head.");
         dll.InsertHead(new DNode(2));
-        System.out.println("Inserted node with data = 2 at head.");
+        System.out.println("Inserted node with data = 2 at the head.");
         dll.InsertHead(new DNode(1));
-        System.out.println("Inserted node with data = 1 at head.");
+        System.out.println("Inserted node with data = 1 at the head.");
 
-        // Insert nodes at tail
+// Insert nodes at tail
         dll.InsertTail(new DNode(4));
-        System.out.println("Inserted node with data = 4 at tail.");
+        System.out.println("Inserted node with data = 4 at the tail.");
         dll.InsertTail(new DNode(5));
-        System.out.println("Inserted node with data = 5 at tail.");
+        System.out.println("Inserted node with data = 5 at the tail.");
         dll.InsertTail(new DNode(6));
-        System.out.println("Inserted node with data = 6 at tail.");
+        System.out.println("Inserted node with data = 6 at the tail.");
 
-        // Insert a node at a specific position
-        dll.Insert(new DNode(7), 4);
-        System.out.println("Inserted node with data = 7 at position 4.");
+// Insert a node at a specific position
+        int position = 4;
+        dll.Insert(new DNode(7), position);
+        System.out.println("Inserted node with data = 7 at position " + position + ".");
+        dll.Print();
 
-        // Search for a node
-        DNode node = dll.Search(new DNode(4));
+// Search for a node
+        DNode node = dll.Search(new DNode(7));
         if (node != null) {
             System.out.println("Search result: Node with data = " + node.getData() + " found.");
         } else {
-            System.out.println("Search result: Node with data = 4 not found.");
+            System.out.println("Search result: Node with data = 7 not found.");
         }
-        // Delete a node
-        dll.Delete(new DNode(2));
-        System.out.println("Deleted node with data = 2.");
 
-        // Sort the list
+// Delete a node
+        DNode nodeToDelete = new DNode(2);
+        dll.Delete(nodeToDelete);
+        System.out.println("Deleted node with data = " + nodeToDelete.getData() + ".");
+
+// Sort the list
         dll.Sort();
         System.out.println("List sorted in ascending order.");
-        // Print the list
+
+// Print the list
+        System.out.print("DLL content: ");
         dll.Print();
-        // Clear the list
+
+// Clear the list
         dll.Clear();
         System.out.println("List cleared.");
         System.out.println("-------------------------------------------------");
-        System.out.println("\nFinished Running through some functionality testing of DLL");
+        System.out.println("Finished running functionality testing of DLL.");
+
     }
 
     private static void testStackLL() {
-        System.out.println("Running through some functionality testing of StackLL");
+        System.out.println("Running  functionality testing of StackLL");
         System.out.println("-------------------------------------------------");
 
         // Creating a new stack
@@ -255,12 +315,12 @@ public class Main {
         // Testing if the stack is empty again
         System.out.println("Is the stack empty? " + myStack.Empty());
         System.out.println("-------------------------------------------------");
-        System.out.println("Finished Running through some functionality testing of StackLL");
+        System.out.println("Finished Running functionality testing of StackLL");
     }
 
     private static void testQueueLL() {
         System.out.println("-------------------------------------------------");
-        System.out.println("Running through some functionality testing of QueueLL");
+        System.out.println("Running functionality testing of QueueLL");
         System.out.println("-------------------------------------------------");
         // create an empty queue
         QueueLL queue = new QueueLL();
@@ -290,7 +350,7 @@ public class Main {
         System.out.println("Peeking at the first node: " + queue.Peek().getData());
 
         // search for a node
-        DNode nodeToSearch = new DNode(20);
+        DNode nodeToSearch = new DNode(30);
         System.out.println("Searching for node " + nodeToSearch.getData() + "...");
         if (queue.Search(nodeToSearch) != null) {
             System.out.println("Node found in the queue.");
@@ -331,11 +391,11 @@ public class Main {
         queue.Print();
 
         System.out.println("-------------------------------------------------");
-        System.out.println("Finished running through some functionality testing of QueueLL");
+        System.out.println("Finished running functionality testing of QueueLL");
     }
 
     private static void testSLL() {
-        System.out.println("Running through some functionality testing of SLL");
+        System.out.println("Running functionality testing of SLL");
         System.out.println("-------------------------------------------------");
         SLL list = new SLL();
 
@@ -384,11 +444,11 @@ public class Main {
         // Print the list
         list.Print();
         System.out.println("-------------------------------------------------");
-        System.out.println("Finished running through some functionality testing of SLL");
+        System.out.println("Finished running functionality testing of SLL");
     }
 
     private static void testBST() {
-        System.out.println("Running through some functionality testing of BST");
+        System.out.println("Running functionality testing of BST");
         System.out.println("-------------------------------------------------");
         
         // create a new BST object
@@ -417,7 +477,7 @@ public class Main {
         tree.printInOrder();
 
         System.out.println("\n-------------------------------------------------");
-        System.out.println("Finished running through some functionality testing of BST");
+        System.out.println("Finished running functionality testing of BST");
     }
 }
 

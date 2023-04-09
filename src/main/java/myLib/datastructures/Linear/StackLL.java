@@ -31,7 +31,7 @@ public class StackLL extends SLL {
         DNode current = super.getHead();
         int i = 1;
         while (current != null) {
-            if (current == node) {
+            if (current.getData() == node.getData()) {
                 return i;
             }
             current = current.getNext();
@@ -39,6 +39,7 @@ public class StackLL extends SLL {
         }
         return -1;
     }
+
 
     @Override
     public void InsertHead(DNode node) {

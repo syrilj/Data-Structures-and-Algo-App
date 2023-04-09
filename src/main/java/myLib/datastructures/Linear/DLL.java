@@ -5,24 +5,24 @@ import myLib.datastructures.nodes.DNode;
 public class DLL {
     private DNode head;
     private DNode tail;
-    private int size;
+    private int count;
 
     public DLL() {
         head = null;
         tail = null;
-        size = 0;
+        count = 0;
     }
 
     public DLL(DNode head) {
         this.head = head;
         tail = null;
-        size = 1;
-        DNode current = head;
-        while (current.getNext() != null) {
-            current = current.getNext();
-            size++;
+        count = 1;
+        DNode present = head;
+        while (present.getNext() != null) {
+            present = present.getNext();
+            count++;
         }
-        tail = current;
+        tail = present;
     }
 
     public void InsertHead(DNode node) {
@@ -30,13 +30,13 @@ public class DLL {
             head = node;
             tail = node;
         } else {
-            DNode temp = head.getNext();
             node.setNext(head);
-            node.getNext().setPrevious(node);
+            head.setPrevious(node);
             head = node;
         }
-        size++;
+        count++;
     }
+
 
     public void InsertTail(DNode node) {
         if (head == null) {
@@ -47,71 +47,69 @@ public class DLL {
             node.setPrevious(tail);
             tail = node;
         }
-        size++;
+        count++;
     }
 
     public void Insert(DNode node, int position) {
-        if (position < 1 || position > size + 1) {
+        if (position < 1 || position > count + 1) {
             throw new IndexOutOfBoundsException();
         }
         if (position == 1) {
             InsertHead(node);
-        } else if (position == size + 1) {
+        } else if (position == count + 1) {
             InsertTail(node);
         } else {
-            DNode current = head;
+            DNode present = head;
             for (int i = 1; i < position - 1; i++) {
-                current = current.getNext();
+                present = present.getNext();
             }
-            node.setNext(current.getNext());
-            node.setPrevious(current);
-            current.getNext().setPrevious(node);
-            current.setNext(node);
-            size++;
+            node.setNext(present.getNext());
+            node.setPrevious(present);
+            present.getNext().setPrevious(node);
+            present.setNext(node);
+            count++;
         }
     }
 
     public void SortedInsert(DNode node) {
         if (head == null) {
             InsertHead(node);
-            tail = head;
-        } else {
-            if (!isSorted()) {
-                Sort();
-            }
-            boolean inserted = false;
-            DNode current = head;
-            DNode prev = null;
+            return;
+        }
 
-            while (current != null && !inserted) {
-                if (node.getData() <= current.getData()) {
-                    if (prev == null) {
-                        InsertHead(node);
-                    } else {
-                        prev.setNext(node);
-                        node.setPrevious(prev);
-                        node.setNext(current);
-                        current.setPrevious(node);
-                    }
-                    inserted = true;
-                } else {
-                    prev = current;
-                    current = current.getNext();
-                }
-            }
-            if (!inserted) {
-                InsertTail(node);
+        if (!isSorted()) {
+            Sort();
+        }
+
+        DNode present = head;
+        DNode prev = null;
+
+        while (present != null && node.getData() > present.getData()) {
+            prev = present;
+            present = present.getNext();
+        }
+
+        if (prev == null) {
+            InsertHead(node);
+        } else {
+            prev.setNext(node);
+            node.setPrevious(prev);
+            node.setNext(present);
+            if (present != null) {
+                present.setPrevious(node);
+            } else {
+                tail = node;
             }
         }
     }
 
     public DNode Search(DNode node) {
-        DNode current = head;
-        while (current != null) {
-            if (current.getData() == node.getData()) {
-                return current;
+        DNode present = head;
+        while (present != null) {
+            if (present.getData() == node.getData()) {
+                return present;
             }
-            current = current.getNext();
+            present = present.getNext();
         }
         return null;
     }
@@ -125,74 +123,70 @@ public class DLL {
         if (head == null) {
             tail = null;
         }
-        size--;
+        count--;
     }
 
     public void DeleteTail() {
         if (head == null) {
             return;
         }
-        if (head.getNext() == null) {
+        if (count == 1) {
             head = null;
             tail = null;
         } else {
-            DNode current = head;
-            while (current.getNext() != tail) {
-                current = current.getNext();
+            DNode present = head;
+            while (present.getNext() != tail) {
+                present = present.getNext();
             }
-            tail = current;
+            tail = present;
             tail.setNext(null);
         }
-        size--;
+        count--;
     }
+
 
     public void Delete(DNode node) {
         if (head == null) {
-            return; // list is empty, nothing to delete
+            return; 
         }
         if (head.getData() == node.getData()) {
             head.getNext().setPrevious(null);
             head = head.getNext();
-            size--;
+            count--;
             if (head == null) {
                 tail = null;
             }
             return;
         }
-        DNode current = head.getNext();
+        DNode present = head.getNext();
         DNode prev = head;
 
-        while (current != null) {
-            if (current.getData() == node.getData()) {
-                prev.setNext(current.getNext());
-                current.getNext().setPrevious(prev);
-                size--;
-                if (current == tail) {
+        while (present != null) {
+            if (present.getData() == node.getData()) {
+                prev.setNext(present.getNext());
+                present.getNext().setPrevious(prev);
+                count--;
+                if (present == tail) {
                     tail = prev;
                 }
                 return;
             }
-            prev = current;
-            current = current.getNext();
+            prev = present;
+            present = present.getNext();
         }
     }
 
     public boolean isSorted() {
         if (head == null || head.getNext() == null) {
-            // empty or single-node list is considered sorted
             return true;
         }
-
-        DNode current = head;
-        while (current.getNext() != null) {
-            if (current.getData() > current.getNext().getData()) {
-                // found unsorted pair
+        DNode present = head;
+        while (present.getNext() != null) {
+            if (present.getData() > present.getNext().getData()) {
                 return false;
             }
-            current = current.getNext();
+            present = present.getNext();
         }
-
-        // entire list is sorted
         return true;
     }
 
@@ -200,40 +194,40 @@ public class DLL {
         if (head == null || head.getNext() == null) {
             return; // list is empty or has only one element, nothing to sort
         }
-        DNode current = head;
+        DNode present = head;
         head = null;
-        size = 0;
+        count = 0;
 
-        while (current != null) {
-            DNode next = current.getNext();
-            current.setNext(null);
-            SortedInsert(current);
-            current = next;
+        while (present != null) {
+            DNode next = present.getNext();
+            present.setNext(null);
+            SortedInsert(present);
+            present = next;
         }
     }
 
     public void Clear() {
         head = null;
         tail = null;
-        size = 0;
+        count = 0;
     }
 
     public void Print() {
         int length = 0;
         boolean isSorted = isSorted();
-        DNode current = head;
+        DNode present = head;
 
-        while (current != null) {
+        while (present != null) {
             length++;
-            current = current.getNext();
+            present = present.getNext();
         }
 
         System.out.println("List length: " + length);
         System.out.println("Sort status: " + (isSorted ? "Sorted" : "Unsorted"));
 
-        current = head;
+        present = head;
 
-        if (current == null) {
+        if (present == null) {
             System.out.println("Empty List");
         } else {
             System.out.println("List content:");
@@ -241,9 +235,9 @@ public class DLL {
             System.out.printf("| %-5s | %-10s |\n", "Index", "Data");
             System.out.println("---------------------------------");
             int i = 1;
-            while (current != null) {
-                System.out.printf("| %-5d | %-10d |\n", i, current.getData());
-                current = current.getNext();
+            while (present != null) {
+                System.out.printf("| %-5d | %-10d |\n", i, present.getData());
+                present = present.getNext();
                 i++;
             }
             System.out.println("---------------------------------");

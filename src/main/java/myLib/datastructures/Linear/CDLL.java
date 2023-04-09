@@ -7,6 +7,7 @@ public class CDLL extends DLL{
     private DNode tail;
     private int tracker;
 
+
     public CDLL(){
         head = null;
         tail = null;
@@ -27,6 +28,10 @@ public class CDLL extends DLL{
         current.setNext(this.head);
         tail = current;
     }
+
+
+
+
 
     @Override
     public void InsertHead(DNode node){
