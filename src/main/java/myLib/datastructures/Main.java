@@ -11,7 +11,7 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
         int choice = 0;
-        while (choice != 9) {
+        while (choice != 10) {
             System.out.println("Select an option:");
             System.out.println("1. Run all tests");
             System.out.println("2. Test Singly Linked List (SLL)");
@@ -21,7 +21,8 @@ public class Main {
             System.out.println("6. Test Circular Doubly Linked List (CDLL)");
             System.out.println("7. Test Circular Singly Linked List (CSLL)");
             System.out.println("8. Test Binary Search Tree (BST)");
-            System.out.println("9. Exit");
+            System.out.println("9. Test AVL Tree (AVL)");
+            System.out.println("10. Exit");
             System.out.print("Enter your choice: ");
             choice = input.nextInt();
 
@@ -59,6 +60,10 @@ public class Main {
                     testBST();
                     break;
                 case 9:
+                    System.out.println("Testing AVL Tree(AVL)");
+                    testAVL();
+                    break;
+                case 10:
                     System.out.println("Exiting...");
                     break;
                 default:
@@ -77,6 +82,7 @@ public class Main {
         testCDLL();
         testCSLL();
         testBST();
+        testAVL();
     }
 
     private static void testCSLL() {
@@ -478,6 +484,15 @@ public class Main {
 
         System.out.println("\n-------------------------------------------------");
         System.out.println("Finished running functionality testing of BST");
+    }
+    private static void testAVL() {
+        System.out.println("Running functionality testing of AVL");
+        System.out.println("-------------------------------------------------");
+        
+        
+
+        System.out.println("\n-------------------------------------------------");
+        System.out.println("Finished running functionality testing of AVL");
     }
 }
 
