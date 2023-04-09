@@ -218,4 +218,7 @@ private void printInOrderHelper(TNode node) {
             System.out.println();
         }
     }
+
+    public void delete(TNode node) {
+    }
 }

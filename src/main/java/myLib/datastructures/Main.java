@@ -464,16 +464,16 @@ public class Main {
         tree.insert(80);
 
         // test the search function
-        TNode node = tree.search(42);
+        TNode node = tree.search(40);
         if (node != null) {
-            System.out.println("Search for 40: \n" + node.data);
+            System.out.println("Search for 40: \n" + node.data + " was found in the tree");
         } else {
             System.out.println("Value not found in tree");
         }
 
         // test the delete function
         tree.delete(20);
-        System.out.println("Traversal after deletion: ");
+        System.out.println("Ordered Traversal after deletion: ");
         tree.printInOrder();
 
         System.out.println("\n-------------------------------------------------");
