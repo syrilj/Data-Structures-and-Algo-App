@@ -4,26 +4,20 @@ import myLib.datastructures.nodes.DNode;
 
 public class StackLL extends SLL {
 
-    private int length; // private variable to keep track of the length
-
     public StackLL() {
         super();
-        length = 0;
     }
 
     public StackLL(DNode node) {
         super(node);
-        length = 0;
     }
 
     public void Push(DNode node) {
         super.InsertHead(node);
-        length++;
     }
 
     public void Pop() {
         super.DeleteHead();
-        length--;
     }
 
     public DNode Peek() {

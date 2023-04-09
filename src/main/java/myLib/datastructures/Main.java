@@ -4,13 +4,14 @@ import myLib.datastructures.Linear.StackLL;
 import myLib.datastructures.nodes.DNode;
 import myLib.datastructures.Linear.*;
 import myLib.datastructures.Linear.DLL;
+import myLib.datastructures.Trees.*;
 
 public class Main {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
         int choice = 0;
-        while (choice != 7) {
+        while (choice != 8) {
             System.out.println("Select a data structure to test:");
             System.out.println("1. Singly Linked List (SLL)");
             System.out.println("2. Queue using Linked List (QueueLL)");
@@ -18,7 +19,8 @@ public class Main {
             System.out.println("4. Doubly Linked List (DLL)");
             System.out.println("5. Circular Doubly Linked List (CDLL)");
             System.out.println("6. Circular Singly Linked List (CSLL)");
-            System.out.println("7. Exit");
+            System.out.println("7. Binary Search Tree (BST)");
+            System.out.println("8. Exit");
             System.out.print("Enter your choice: ");
             choice = input.nextInt();
 
@@ -47,7 +49,12 @@ public class Main {
                     System.out.println("Testing Circular Singly Linked List (CSLL)");
                     testCSLL();
                     break;
+
                 case 7:
+                    System.out.println("Testing Binary Search Tree(BST)");
+                    testBST();
+                    break;
+                case 8:
                     System.out.println("Exiting...");
                     break;
                 default:
@@ -378,6 +385,39 @@ public class Main {
         list.Print();
         System.out.println("-------------------------------------------------");
         System.out.println("Finished running through some functionality testing of SLL");
+    }
+
+    private static void testBST() {
+        System.out.println("Running through some functionality testing of BST");
+        System.out.println("-------------------------------------------------");
+        
+        // create a new BST object
+        BST tree = new BST();
+
+        // insert some nodes into the tree
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(70);
+        tree.insert(60);
+        tree.insert(80);
+
+        // test the search function
+        TNode node = tree.search(42);
+        if (node != null) {
+            System.out.println("Search for 40: \n" + node.data);
+        } else {
+            System.out.println("Value not found in tree");
+        }
+
+        // test the delete function
+        tree.delete(20);
+        System.out.println("Traversal after deletion: ");
+        tree.printInOrder();
+
+        System.out.println("\n-------------------------------------------------");
+        System.out.println("Finished running through some functionality testing of BST");
     }
 }
 
