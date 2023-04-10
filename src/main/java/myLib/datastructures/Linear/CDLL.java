@@ -1,19 +1,29 @@
 package myLib.datastructures.Linear;
 
 import myLib.datastructures.nodes.DNode;
+/**
 
+ This class represents a circular doubly linked list (CDLL) that extends a doubly linked list (DLL).
+ The CDLL contains two sentinel nodes, head and tail, and a counter tracker to keep track of the size of the list.
+ */
 public class CDLL extends DLL{
     private DNode head;
     private DNode tail;
     private int tracker;
 
-
+    /**
+     * Constructs an empty CDLL with null head and tail sentinel nodes and a tracker of 0.
+     */
     public CDLL(){
         head = null;
         tail = null;
         tracker = 0;
     }
-
+    /**
+     * Constructs a CDLL with a specified head node and initializes the tail node and tracker accordingly.
+     *
+     * @param head the head node of the CDLL
+     */
     public CDLL(DNode head){
         this.head = head;
         tail = null;
@@ -29,10 +39,66 @@ public class CDLL extends DLL{
         tail = current;
     }
 
+    /**
+     * Deletes the head node of the CDLL and updates the tail and tracker accordingly.
+     */
+    @Override
+    public void DeleteHead(){
+        if(head == null){
+            return;
+        }else{
+            head.getNext().setPrevious(tail);
+            head = head.getNext();
+            tail.setNext(head);
+            tracker--;
+        }
+    }
+    /**
+     * Deletes the tail node of the CDLL and updates the head and tracker accordingly.
+     */
+    @Override
+    public void DeleteTail(){
+        if(head == null){
+            return;
+        }else{
+            DNode current = head;
+            while(current.getNext() != tail){
+                current = current.getNext();
+            }
+            current.setNext(head);
+            tail = current;
+            head.setPrevious(tail);
+            tracker--;
+        }
+    }
+    /**
+     * Deletes a specified node from the CDLL and updates the tracker accordingly.
+     *
+     * @param node the node to delete from the CDLL
+     */
+    @Override
+    public void Delete(DNode node){
+        if(head == null){
+            return;
+        }else{
+            DNode current = head;
+            while(current.getNext() != head && current.getNext().getData() != node.getData()){
+                current = current.getNext();
+            }
+            if(current.getNext().getData() == node.getData()){
+                current.setNext(current.getNext().getNext());
+                current.getNext().setPrevious(current);
+                tracker--;
+            }
+        }
+    }
 
 
-
-
+    /**
+     * Inserts a node at the head of the CDLL and updates the tail and tracker accordingly.
+     *
+     * @param node the node to insert at the head of the CDLL
+     */
     @Override
     public void InsertHead(DNode node){
         if(head == null){
@@ -48,7 +114,9 @@ public class CDLL extends DLL{
         }
         tracker++;
     }
-
+    /**
+     * Inserts a node at the tail of the CDLL and updates the tracker accordingly.
+     */
     @Override
     public void InsertTail(DNode node){
         if(head == null){
@@ -124,51 +192,6 @@ public class CDLL extends DLL{
                 return current;
             }else{
                 return null;
-            }
-        }
-    }
-
-    @Override
-    public void DeleteHead(){
-        if(head == null){
-            return;
-        }else{
-            head.getNext().setPrevious(tail);
-            head = head.getNext();
-            tail.setNext(head);
-            tracker--;
-        }
-    }
-
-    @Override
-    public void DeleteTail(){
-        if(head == null){
-            return;
-        }else{
-            DNode current = head;
-            while(current.getNext() != tail){
-                current = current.getNext();
-            }
-            current.setNext(head);
-            tail = current;
-            head.setPrevious(tail);
-            tracker--;
-        }
-    }
-
-    @Override
-    public void Delete(DNode node){
-        if(head == null){
-            return;
-        }else{
-            DNode current = head;
-            while(current.getNext() != head && current.getNext().getData() != node.getData()){
-                current = current.getNext();
-            }
-            if(current.getNext().getData() == node.getData()){
-                current.setNext(current.getNext().getNext());
-                current.getNext().setPrevious(current);
-                tracker--;
             }
         }
     }

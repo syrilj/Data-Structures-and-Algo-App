@@ -30,7 +30,6 @@ public class SLL {
         this.tracker = 0;
     }
     /**
-
      Checks if the list is empty.
      @return true if the list is empty, false otherwise
      */
@@ -182,12 +181,12 @@ public class SLL {
                 this.tail = node;
             }
         } else {
-            DNode temp = this.head;
-            while (temp.getNext() != this.tail.getNext() && temp.getNext().getData() <= node.getData()) {
-                temp = temp.getNext();
+            DNode intr = this.head;
+            while (intr.getNext() != this.tail.getNext() && intr.getNext().getData() <= node.getData()) {
+                intr = intr.getNext();
             }
-            node.setNext(temp.getNext());
-            temp.setNext(node);
+            node.setNext(intr.getNext());
+            intr.setNext(node);
             if (node.getNext() == null) {
                 this.tail = node;
             }
@@ -261,12 +260,12 @@ public class SLL {
             this.tracker = 0;
             return;
         }
-        DNode temp = this.head;
-        while (temp.getNext() != this.tail) {
-            temp = temp.getNext();
+        DNode intr = this.head;
+        while (intr.getNext() != this.tail) {
+            intr = intr.getNext();
         }
-        temp.setNext(null);
-        this.tail = temp;
+        intr.setNext(null);
+        this.tail = intr;
         this.tracker--;
     }
 
@@ -284,27 +283,19 @@ public class SLL {
             }
             return;
         }
-        if (this.tail.getData() == node.getData()) {
-            DNode temp = this.head;
-            for (int i = 0; i < this.tracker - 2; i++) {
-                temp = temp.getNext();
-            }
-            temp.setNext(null);
-            this.tail = temp;
-            this.tracker--;
-            return;
-        }
         DNode prevNode = this.head;
-        for (int i = 0; i < this.tracker - 1; i++) {
-            DNode current = prevNode.getNext();
-            if (current.getData() == node.getData()) {
-                prevNode.setNext(current.getNext());
-                this.tracker--;
-                return;
-            }
+        while (prevNode.getNext() != null && prevNode.getNext().getData() != node.getData()) {
             prevNode = prevNode.getNext();
         }
+        if (prevNode.getNext() != null) {
+            prevNode.setNext(prevNode.getNext().getNext());
+            this.tracker--;
+            if (prevNode.getNext() == null) {
+                this.tail = prevNode;
+            }
+        }
     }
+
 
     /**
      * sort helpful for other methods as well
@@ -313,33 +304,34 @@ public class SLL {
         if (this.head == null || this.head.getNext() == null || this.isSorted()) {
             return;
         }
-        DNode current = this.head.getNext();
-        DNode prev = this.head;
-        while (current != this.tail.getNext()) {
-            System.out.println(current.getData());
-            if (current.getData() < prev.getData()) {
-                prev.setNext(current.getNext());
-                if (current.getData() < this.head.getData()) {
-                    current.setNext(this.head);
-                    this.head = current;
-                } else {
-                    DNode temp = this.head;
-                    while (temp.getNext() != this.tail.getNext() && temp.getNext().getData() <= current.getData()) {
-                        temp = temp.getNext();
+
+        boolean swapped;
+        do {
+            swapped = false;
+            DNode current = this.head;
+            while (current.getNext() != null) {
+                if (current.getData() > current.getNext().getData()) {
+                    // swap current and current.next
+                    DNode tmp = current.getNext();
+                    current.setNext(tmp.getNext());
+                    tmp.setNext(current);
+                    if (current == this.head) {
+                        this.head = tmp;
+                    } else {
+                        DNode prev = this.head;
+                        while (prev.getNext() != current) {
+                            prev = prev.getNext();
+                        }
+                        prev.setNext(tmp);
                     }
-                    current.setNext(temp.getNext());
-                    temp.setNext(current);
+                    swapped = true;
+                } else {
+                    current = current.getNext();
                 }
-                if (prev.getNext() == null) {
-                    this.tail = prev;
-                }
-                current = prev.getNext();
-            } else {
-                prev = current;
-                current = current.getNext();
             }
-        }
+        } while (swapped);
     }
+
 
     /**
      * clears the whole list
