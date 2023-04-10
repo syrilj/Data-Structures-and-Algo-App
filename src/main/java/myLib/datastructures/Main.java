@@ -2,6 +2,7 @@ package myLib.datastructures;
 import java.util.Scanner;
 import myLib.datastructures.Linear.StackLL;
 import myLib.datastructures.nodes.DNode;
+import myLib.datastructures.nodes.TNode;
 import myLib.datastructures.Linear.*;
 import myLib.datastructures.Linear.DLL;
 import myLib.datastructures.Trees.*;
@@ -517,7 +518,7 @@ public class Main {
         tree.printInOrder();
         System.out.println("\nPrinting in Breadth First Order:");
         tree.printBF();
-        System.out.println("Deleting from the tree:");
+        System.out.println("Deleting from the tree...");
         tree.delete(30);
         System.out.println("Printing after deleting from the tree:");
         tree.printInOrder();

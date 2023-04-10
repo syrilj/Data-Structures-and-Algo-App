@@ -3,6 +3,8 @@ package myLib.datastructures.Trees;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import myLib.datastructures.nodes.TNode;
+
 public class BST {
     private TNode root;
 
