@@ -28,7 +28,6 @@ public class TNode {
         this.parent = parent;
         this.left = left;
         this.right = right;
-        this.height = height;
     }
 
     public int getData() {
@@ -79,10 +78,7 @@ public class TNode {
         return Integer.toString(this.data);
     }
 
-    
-
-
-     public void setHeight(int height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 }

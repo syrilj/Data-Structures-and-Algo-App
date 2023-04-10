@@ -220,5 +220,67 @@ private void printInOrderHelper(TNode node) {
     }
 
     public void delete(TNode node) {
+    // Find the node to be deleted
+    TNode current = root;
+    TNode parent = null;
+    boolean isLeftChild = false;
+    while (current != null && current.getData() != node.getData()) {
+        parent = current;
+        if (node.getData() < current.getData()) {
+            current = current.getLeft();
+            isLeftChild = true;
+        } else {
+            current = current.getRight();
+            isLeftChild = false;
+        }
     }
+    // If the node to be deleted is not found, return
+    if (current == null) {
+        return;
+    }
+    // Case 1: Node to be deleted has no children
+    if (current.getLeft() == null && current.getRight() == null) {
+        if (current == root) {
+            root = null;
+        } else if (isLeftChild) {
+            parent.setLeft(null);
+        } else {
+            parent.setRight(null);
+        }
+    }
+    // Case 2: Node to be deleted has one child
+    else if (current.getLeft() == null) {
+        if (current == root) {
+            root = current.getRight();
+        } else if (isLeftChild) {
+            parent.setLeft(current.getRight());
+        } else {
+            parent.setRight(current.getRight());
+        }
+    } else if (current.getRight() == null) {
+        if (current == root) {
+            root = current.getLeft();
+        } else if (isLeftChild) {
+            parent.setLeft(current.getLeft());
+        } else {
+            parent.setRight(current.getLeft());
+        }
+    }
+    // Case 3: Node to be deleted has two children
+    else {
+        // Find the successor node
+        TNode successor = getSuccessor(current);
+        // Connect the parent of the node to be deleted to the successor
+        if (current == root) {
+            root = successor;
+        } else if (isLeftChild) {
+            parent.setLeft(successor);
+        } else {
+            parent.setRight(successor);
+        }
+        // Connect the successor to the left child of the node to be deleted
+        successor.setLeft(current.getLeft());
+    }
+}
+
 }

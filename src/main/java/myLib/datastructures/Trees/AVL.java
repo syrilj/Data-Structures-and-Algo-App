@@ -51,7 +51,11 @@ public class AVL extends BST {
             System.out.println("Value " + val + " not found in the tree.");
             return;
         }
-        super.delete(node);
-        balanceTree();
+        else{
+            super.delete(node);
+            balanceTree();
+            System.out.println("done");
+        }
+        
     }
 }

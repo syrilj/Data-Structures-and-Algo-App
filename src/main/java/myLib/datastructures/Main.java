@@ -489,7 +489,25 @@ public class Main {
         System.out.println("Running functionality testing of AVL");
         System.out.println("-------------------------------------------------");
         
-        
+        // create a new BST object
+        AVL tree = new AVL();
+
+        // insert some nodes into the tree
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(70);
+        tree.insert(60);
+        tree.insert(80);
+
+        // tree.printBF();
+        tree.printInOrder();
+     System.out.println("\n-------------------------------------------------");
+        tree.delete(30);
+     System.out.println("\n-------------------------------------------------");
+
+        tree.printInOrder();
 
         System.out.println("\n-------------------------------------------------");
         System.out.println("Finished running functionality testing of AVL");
