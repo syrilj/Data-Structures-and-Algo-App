@@ -397,33 +397,29 @@ public class Main {
     private static void testSLL() {
         System.out.println("Running functionality testing of SLL");
         System.out.println("-------------------------------------------------");
+        // Create a new singly linked list
         SLL list = new SLL();
 
-        // Insert 10 at the head of the list
+        // Insert nodes at the head and tail of the list
         DNode node1 = new DNode(10);
-        list.InsertHead(node1);
-
-        // Insert 20 at the tail of the list
         DNode node2 = new DNode(20);
+        list.InsertHead(node1);
         list.InsertTail(node2);
 
-        // Insert 15 at position 1 in the list
-        DNode node3 = new DNode(11);
-        list.Insert(node3, 1);
-
-        // Insert 5 at position 0 in the list
+        // Insert nodes at specific positions in the list
+        DNode node3 = new DNode(15);
         DNode node4 = new DNode(5);
-        list.Insert(node4, 0);
-
-        // Insert 25 at position 4 in the list
         DNode node5 = new DNode(25);
-        list.Insert(node5, 4);
+        list.Insert(node3, 1); // Insert at position 1
+        list.Insert(node4, 0); // Insert at position 0
+        list.Insert(node5, 4); // Insert at position 4
 
         // Print the list
+        System.out.println("Initial list:");
         list.Print();
 
-        // Search for node with data = 15
-        DNode node6 = new DNode(12);
+        // Search for a node in the list
+        DNode node6 = new DNode(15);
         DNode foundNode = list.Search(node6);
         if (foundNode != null) {
             System.out.println("Node with data = " + node6.getData() + " found in list.");
@@ -431,18 +427,34 @@ public class Main {
             System.out.println("Node with data = " + node6.getData() + " not found in list.");
         }
 
-        // Delete the node at the head of the list
+        // Delete the head and tail nodes
+        System.out.println("Deleting head and tail nodes:");
         list.DeleteHead();
-
-        // Delete the node at the tail of the list
         list.DeleteTail();
-
-        // Delete the node with data = 15
-        DNode node7 = new DNode(11);
-        list.Delete(node7);
-
-        // Print the list
         list.Print();
+
+        // Delete a specific node in the list
+        DNode node7 = new DNode(20);
+        System.out.println("Deleting node with data = " + node7.getData() + ":");
+        list.Delete(node7);
+        list.Print();
+
+        // Sort the list and print it
+        System.out.println("Sorting the list:");
+        list.Sort();
+        list.Print();
+
+        // Insert a new node in its sorted position
+        DNode node8 = new DNode(12);
+        System.out.println("Inserting node with data = " + node8.getData() + " in sorted position:");
+        list.SortedInsert(node8);
+        list.Print();
+
+        // Clear the list
+        System.out.println("Clearing the list:");
+        list.Clear();
+        list.Print();
+
         System.out.println("-------------------------------------------------");
         System.out.println("Finished running functionality testing of SLL");
     }

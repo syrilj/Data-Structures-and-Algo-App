@@ -1,18 +1,26 @@
 package myLib.datastructures.Linear;
 
 import myLib.datastructures.nodes.DNode;
-
+/**
+ * A class that represents a doubly-linked list.
+ */
 public class DLL {
     private DNode head;
     private DNode tail;
     private int count;
-
+    /**
+     * Constructs an empty doubly-linked list.
+     */
     public DLL() {
         head = null;
         tail = null;
         count = 0;
     }
-
+    /**
+     * Constructs a doubly-linked list with the given head node.
+     *
+     * @param head the head node of the list
+     */
     public DLL(DNode head) {
         this.head = head;
         tail = null;
@@ -24,7 +32,11 @@ public class DLL {
         }
         tail = present;
     }
-
+    /**
+     * Inserts a node at the beginning of the list.
+     *
+     * @param node the node to be inserted
+     */
     public void InsertHead(DNode node) {
         if (head == null) {
             head = node;
@@ -37,7 +49,11 @@ public class DLL {
         count++;
     }
 
-
+    /**
+     * Inserts a node at the end of the list.
+     *
+     * @param node the node to be inserted
+     */
     public void InsertTail(DNode node) {
         if (head == null) {
             head = node;
@@ -49,7 +65,13 @@ public class DLL {
         }
         count++;
     }
-
+    /**
+     * Inserts a node at the given position in the list.
+     *
+     * @param node     the node to be inserted
+     * @param position the position at which to insert the node (1-based)
+     * @throws IndexOutOfBoundsException if the position is out of bounds
+     */
     public void Insert(DNode node, int position) {
         if (position < 1 || position > count + 1) {
             throw new IndexOutOfBoundsException();
@@ -70,7 +92,11 @@ public class DLL {
             count++;
         }
     }
-
+    /**
+     * Inserts a node into the list in sorted order.
+     *
+     * @param node the node to be inserted
+     */
     public void SortedInsert(DNode node) {
         if (head == null) {
             InsertHead(node);
@@ -102,7 +128,12 @@ public class DLL {
             }
         }
     }
-
+    /**
+     * Searches for a node in the list.
+     *
+     * @param node the node to search for
+     * @return the node if found, or null if not found
+     */
     public DNode Search(DNode node) {
         DNode present = head;
         while (present != null) {
@@ -113,7 +144,9 @@ public class DLL {
         }
         return null;
     }
-
+    /**
+     * Deletes the head node of the list.
+     */
     public void DeleteHead() {
         if (head == null) {
             return;
@@ -125,7 +158,9 @@ public class DLL {
         }
         count--;
     }
-
+    /**
+     * Deletes the tail node of the list.
+     */
     public void DeleteTail() {
         if (head == null) {
             return;
@@ -144,7 +179,11 @@ public class DLL {
         count--;
     }
 
-
+    /**
+     * Deletes the given node from the list.
+     *
+     * @param node the node to be deleted
+     */
     public void Delete(DNode node) {
         if (head == null) {
             return; 
@@ -176,6 +215,11 @@ public class DLL {
         }
     }
 
+    /**
+     * Returns true if the list is sorted.
+     *
+     * @return true if the list is sorted, false otherwise
+     */
     public boolean isSorted() {
         if (head == null || head.getNext() == null) {
             return true;
@@ -189,6 +233,9 @@ public class DLL {
         }
         return true;
     }
+    /**
+     * Sorts the list.
+     */
 
     public void Sort() {
         if (head == null || head.getNext() == null) {
@@ -205,13 +252,17 @@ public class DLL {
             present = next;
         }
     }
-
+    /**
+     * Clears the list.
+     */
     public void Clear() {
         head = null;
         tail = null;
         count = 0;
     }
-
+    /**
+     * Prints information about the list to the console.
+     */
     public void Print() {
         int length = 0;
         boolean isSorted = isSorted();
