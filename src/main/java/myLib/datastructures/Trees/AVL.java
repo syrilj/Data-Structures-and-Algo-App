@@ -54,7 +54,6 @@ public class AVL extends BST {
         else{
             super.delete(node);
             balanceTree();
-            System.out.println("done");
         }
         
     }

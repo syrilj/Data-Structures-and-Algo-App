@@ -513,13 +513,23 @@ public class Main {
         tree.insert(60);
         tree.insert(80);
 
-        // tree.printBF();
+        System.out.println("Printing in order:");
         tree.printInOrder();
-     System.out.println("\n-------------------------------------------------");
+        System.out.println("\nPrinting in Breadth First Order:");
+        tree.printBF();
+        System.out.println("Deleting from the tree:");
         tree.delete(30);
-     System.out.println("\n-------------------------------------------------");
-
+        System.out.println("Printing after deleting from the tree:");
         tree.printInOrder();
+        // test the search function
+        TNode node = tree.search(40);
+        if (node != null) {
+            System.out.println("\nSearch for 40: \n" + node.data + " was found in the tree");
+        } else {
+            System.out.println("Value not found in tree");
+        }
+
+        
 
         System.out.println("\n-------------------------------------------------");
         System.out.println("Finished running functionality testing of AVL");
