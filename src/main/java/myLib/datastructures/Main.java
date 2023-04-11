@@ -360,7 +360,7 @@ public class Main {
         DNode nodeToSearch = new DNode(30);
         System.out.println("Searching for node " + nodeToSearch.getData() + "...");
         if (queue.Search(nodeToSearch) != null) {
-            System.out.println("Node found in the queue.");
+            System.out.println( "Node found in the queue.");
         } else {
             System.out.println("Node not found in the queue.");
         }
@@ -369,7 +369,7 @@ public class Main {
         DNode nodeToSearch2 = new DNode(50);
         System.out.println("Searching for node " + nodeToSearch2.getData() + "...");
         if (queue.Search(nodeToSearch2) != null) {
-            System.out.println("Node found in the queue.");
+            System.out.println( "Node found in the queue.");
         } else {
             System.out.println("Node not found in the queue.");
         }
