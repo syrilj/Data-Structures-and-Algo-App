@@ -499,38 +499,46 @@ public class Main {
         System.out.println("Finished running functionality testing of BST");
     }
     private static void testAVL() {
-        System.out.println("Running functionality testing of AVL");
+        System.out.println("Running functionality testing of AVL tree");
         System.out.println("-------------------------------------------------");
-        
-        // create a new BST object
+
+// Create a new AVL object
         AVL tree = new AVL();
 
-        // insert some nodes into the tree
+// Insert some nodes into the tree
         tree.insert(50);
+        System.out.println("Inserted 50");
+        tree.insert(25);
+        System.out.println("Inserted 25");
+        tree.insert(75);
+        System.out.println("Inserted 75");
+        tree.insert(10);
+        System.out.println("Inserted 10");
         tree.insert(30);
-        tree.insert(20);
-        tree.insert(40);
-        tree.insert(70);
+        System.out.println("Inserted 30");
         tree.insert(60);
-        tree.insert(80);
+        System.out.println("Inserted 85");
+        System.out.println("Inorder traversal of the tree: ");
+        tree.printInOrder();
 
-        System.out.println("Printing in order:");
-        tree.printInOrder();
-        System.out.println("\nPrinting in Breadth First Order:");
-        tree.printBF();
-        System.out.println("Deleting from the tree...");
+// Delete some nodes from the tree
+        System.out.println("\nDeleting 30");
         tree.delete(30);
-        System.out.println("Printing after deleting from the tree:");
-        tree.printInOrder();
+        System.out.println("Deleting 85");
+        tree.delete(85);
+
+// Set the root node to the node containing the value 60
         // test the search function
         TNode node = tree.search(40);
         if (node != null) {
-            System.out.println("\nSearch for 40: \n" + node.data + " was found in the tree");
+            System.out.println("Search for 40: \n" + node.data + " was found in the tree");
         } else {
             System.out.println("Value not found in tree");
         }
 
-        
+// Test the inorder traversal function
+        System.out.println("Inorder traversal of the tree: ");
+        tree.printInOrder();
 
         System.out.println("\n-------------------------------------------------");
         System.out.println("Finished running functionality testing of AVL");
