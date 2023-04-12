@@ -1,4 +1,4 @@
-package myLib.datastructures;
+package myLib;
 import java.util.Scanner;
 import myLib.datastructures.Linear.StackLL;
 import myLib.datastructures.nodes.DNode;
@@ -6,13 +6,14 @@ import myLib.datastructures.nodes.TNode;
 import myLib.datastructures.Linear.*;
 import myLib.datastructures.Linear.DLL;
 import myLib.datastructures.Trees.*;
+import myLib.datastructures.Heap.*;
 
 public class Main {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
         int choice = 0;
-        while (choice != 10) {
+        while (choice != 11) {
             System.out.println("Select an option:");
             System.out.println("1. Run all tests");
             System.out.println("2. Test Singly Linked List (SLL)");
@@ -23,7 +24,9 @@ public class Main {
             System.out.println("7. Test Circular Singly Linked List (CSLL)");
             System.out.println("8. Test Binary Search Tree (BST)");
             System.out.println("9. Test AVL Tree (AVL)");
-            System.out.println("10. Exit");
+            System.out.println("10. Test Max Heap (MaxH)");
+            System.out.println("11. Test Min Heap (MinH)");
+            System.out.println("12. Exit");
             System.out.print("Enter your choice: ");
             choice = input.nextInt();
 
@@ -65,6 +68,14 @@ public class Main {
                     testAVL();
                     break;
                 case 10:
+                    System.out.println("Testing Max Heap (MaxH)");
+                    testMaxH();
+                    break;
+                case 11:
+                    System.out.println("Testing Min Heap (MinH)");
+                    testMinH();
+                    break;
+                case 12:
                     System.out.println("Exiting...");
                     break;
                 default:
@@ -84,6 +95,8 @@ public class Main {
         testCSLL();
         testBST();
         testAVL();
+        testMaxH();
+        testMinH();
     }
 
     private static void testCSLL() {
@@ -534,6 +547,41 @@ public class Main {
 
         System.out.println("\n-------------------------------------------------");
         System.out.println("Finished running functionality testing of AVL");
+    }
+    private static void testMaxH(){
+        MaxH maxHeap = new MaxH();
+        maxHeap.insert(15);
+        maxHeap.insert(10);
+        maxHeap.insert(14);
+        maxHeap.insert(7);
+        maxHeap.insert(5);
+        maxHeap.insert(1);
+        maxHeap.insert(8);
+        maxHeap.insert(19);
+
+        // print the contents of the MaxH heap
+        System.out.println("MaxH heap:");
+        maxHeap.print();
+        System.out.println("Peek max: " + maxHeap.peekMax()); // should print 10
+        System.out.println("Extract max: " + maxHeap.extractMax()); // should print 10
+        System.out.println("After extracting max:");
+        maxHeap.print();
+
+    }
+    private static void testMinH(){
+
+        // create a MinH heap and add elements
+        MinH minHeap = new MinH();
+        minHeap.insert(15);
+        minHeap.insert(10);
+        minHeap.insert(14);
+        minHeap.insert(7);
+        minHeap.insert(5);
+
+        // print the contents of the MinH heap
+        System.out.println("Peek min: " + minHeap.peekMin()); // should print 1
+        System.out.println("Extract min: " + minHeap.extractMin()); // should print
+        minHeap.print();
     }
 }
 
