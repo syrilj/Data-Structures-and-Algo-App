@@ -10,14 +10,30 @@ public class DLL {
     private int count;
     /**
      * Constructs an empty doubly-linked list.
+     * Default constructor needs to account for tail
      */
     public DLL() {
         head = null;
         tail = null;
         count = 0;
     }
+
+
+    public DNode getTail() {
+        return this.tail;
+    }
+
+    public DNode getHead() {
+        return this.head;
+    }
+
+    public int getLength() {
+        return this.count;
+    }
+
     /**
-     * Constructs a doubly-linked list with the given head node.
+     * Constructor overload with one node initializes the list with head and tail pointing
+     * to the same node
      *
      * @param head the head node of the list
      */
@@ -57,12 +73,11 @@ public class DLL {
     public void InsertTail(DNode node) {
         if (head == null) {
             head = node;
-            tail = node;
         } else {
             tail.setNext(node);
             node.setPrevious(tail);
-            tail = node;
         }
+        tail = node;
         count++;
     }
     /**
@@ -108,18 +123,18 @@ public class DLL {
         }
 
         DNode present = head;
-        DNode prev = null;
+        DNode previous = null;
 
         while (present != null && node.getData() > present.getData()) {
-            prev = present;
+            previous = present;
             present = present.getNext();
         }
 
-        if (prev == null) {
+        if (previous == null) {
             InsertHead(node);
         } else {
-            prev.setNext(node);
-            node.setPrevious(prev);
+            previous.setNext(node);
+            node.setPrevious(previous);
             node.setNext(present);
             if (present != null) {
                 present.setPrevious(node);
@@ -186,7 +201,7 @@ public class DLL {
      */
     public void Delete(DNode node) {
         if (head == null) {
-            return; 
+            return;
         }
         if (head.getData() == node.getData()) {
             head.getNext().setPrevious(null);
@@ -198,19 +213,19 @@ public class DLL {
             return;
         }
         DNode present = head.getNext();
-        DNode prev = head;
+        DNode previous = head;
 
         while (present != null) {
             if (present.getData() == node.getData()) {
-                prev.setNext(present.getNext());
-                present.getNext().setPrevious(prev);
+                previous.setNext(present.getNext());
+                present.getNext().setPrevious(previous);
                 count--;
                 if (present == tail) {
-                    tail = prev;
+                    tail = previous;
                 }
                 return;
             }
-            prev = present;
+            previous = present;
             present = present.getNext();
         }
     }

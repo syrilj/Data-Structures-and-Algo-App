@@ -32,9 +32,10 @@ public class MaxH extends Heap {
         int max = elements.get(0);
         elements.set(0, elements.get(elements.size() - 1));
         elements.remove(elements.size() - 1);
-        heapifyDown(0);
+        heapifyDown(1);
         return max;
     }
+
 
     public void increaseKey(int i, int key) {
         if (i < 0 || i >= elements.size()) {

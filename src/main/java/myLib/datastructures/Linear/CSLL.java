@@ -142,27 +142,47 @@ public class CSLL extends SLL{
      * @param node the node to be inserted into the list
      */
     @Override
-    public void SortedInsert(DNode node){
-        if(head == null){
+    public void SortedInsert(DNode node) {
+        if (head == null|| size ==0 ) {
+            // If the list is empty, set the new node as both head and tail
             head = node;
             tail = node;
-            head.setNext(head);
-        }else{
-            if(!isSorted()){
+            node.setNext(node);
+            size = 1;
+        } else {
+            // If the list is not empty and the new node's data is greater than or equal to the head's data,
+            // insert the node in its proper position
+            DNode present = head;
+            DNode previous = tail;
+            while(present != head && node.getData() > present.getData()){
+                previous = present;
+                present = present.getNext();
+            }
+
+            if (present == tail && node.getData() < present.getData()) {
+                InsertHead(node);
+            }
+            else{
+                node.setNext(present);
+                previous.setNext(node);
+                if(present == head){
+                    tail = node;
+                }
+                size++;
                 Sort();
             }
-            DNode current = head;
-            while(current.getNext() != head && current.getNext().getData() < node.getData()){
-                current = current.getNext();
-            }
-            node.setNext(current.getNext());
-            current.setNext(node);
-            if(current == tail){
-                tail = node;
-            }
         }
-        size++;
     }
+
+
+
+
+
+
+
+
+
+
     /**
      * Searches for a node with the same data as the given node in the list.
      *
@@ -238,26 +258,26 @@ public class CSLL extends SLL{
         }
     }
     /**
-     * Checks if the list is sorted in ascending order.
+     * Checks if the CSLL is sorted in ascending order.
      *
-     * @return true if the list is sorted, false otherwise
+     * @return true if the CSLL is sorted in ascending order, false otherwise
      */
     @Override
-    public boolean isSorted(){
-        if(head == null){
+    public boolean isSorted() {
+        if (head == null) {
             return true;
-        }else{
-            DNode current = head;
-            while(current.getNext() != head && current.getData() <= current.getNext().getData()){
-                current = current.getNext();
-            }
-            if(current.getNext() == head){
-                return true;
-            }else{
+        }
+        DNode current = head;
+        while (current.getNext() != head) {
+            if (current.getData() > current.getNext().getData()) {
                 return false;
             }
+            current = current.getNext();
         }
+        return true;
     }
+
+
     /**
      * Prints the length, sorted status, and content of the list.
      */
@@ -279,13 +299,14 @@ public class CSLL extends SLL{
             DNode current = head;
             System.out.print(current.getData());
             current = current.getNext();
-            while (current.getData() != head.getData()) {
+            while (current != null && current != head) {
                 System.out.print(" -> " + current.getData());
                 current = current.getNext();
             }
             System.out.println();
         }
     }
+
     /**
      * Clears the list by setting the head, tail, and size to null or 0.
      */
@@ -294,5 +315,9 @@ public class CSLL extends SLL{
         head = null;
         tail = null;
         size = 0;
+    }
+
+    public int getSize(){
+        return this.size;
     }
 }

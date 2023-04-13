@@ -102,7 +102,10 @@ public class Main {
     private static void testCSLL() {
         System.out.println("-------------------------------------------------");
         System.out.println("Running functionality testing of CSLL");
-        CSLL list = new CSLL();
+        // Create a new instance of the CSLL class with a head node
+        DNode head = new DNode(4);
+        CSLL list = new CSLL(head);
+
 
         // Insert nodes at the head and tail of the list
         list.InsertHead(new DNode(1));
@@ -110,13 +113,13 @@ public class Main {
         list.InsertTail(new DNode(3));
 
         // Print the list
-        list.Print(); // List length: 3 Sorted: Yes List content: 1 -> 2 -> 3
+        list.Print(); // List length: 3 Sorted: Yes List content: 1 -> 4-> 2 -> 3
 
         // Insert a node at a specific position
         list.Insert(new DNode(4), 2);
 
         // Print the list
-        list.Print(); // List length: 4 Sorted: Yes List content: 1 -> 4 -> 2 -> 3
+        list.Print(); // List length: 4 Sorted: Yes List content: 1 -> 4 -> 4 -> 2 -> 3
 
         // Insert a node in sorted order
         list.SortedInsert(new DNode(0));
@@ -155,6 +158,7 @@ public class Main {
 
         // Print the list
         list.Print(); // List length: 0 Sorted: Yes List content: empty
+
         System.out.println("-------------------------------------------------");
         System.out.println("Finished Running functionality testing of CSLL");
     }
@@ -164,8 +168,8 @@ public class Main {
     private static void testCDLL() {
         System.out.println("-------------------------------------------------");
         System.out.println("Running functionality testing of CDLL");
+        System.out.println("CDLL base constructor");
         CDLL list = new CDLL();
-
         // insert nodes into list
         list.InsertTail(new DNode(10));
         list.InsertTail(new DNode(20));
@@ -189,7 +193,7 @@ public class Main {
         // print out the updated list
         list.Print();
 
-        // search for a node in the list
+
         DNode searchNode = new DNode(20);
         DNode foundNode = list.Search(searchNode);
 
@@ -206,6 +210,53 @@ public class Main {
 
         // print out the sorted list
         list.Print();
+
+
+
+        DNode headNode = new DNode(10);
+        CDLL myList = new CDLL(headNode);
+
+// Insert nodes into the list
+        myList.InsertTail(new DNode(20));
+        myList.InsertTail(new DNode(30));
+        myList.InsertHead(new DNode(5));
+        myList.Insert(new DNode(15), 2);
+
+        System.out.println("Inserting 10, 20, 15, 20, and 30 into the list...");
+
+// Print out the list
+        myList.Print();
+
+// Delete nodes from the list
+        myList.DeleteHead();
+        myList.DeleteTail();
+        myList.Delete(new DNode(15));
+
+        System.out.println("Deleting the head, tail, and node with value 15 from the list...");
+
+// Print out the updated list
+        myList.Print();
+
+
+        DNode searchNode2 = new DNode(20);
+        DNode foundNode2 = myList.Search(searchNode2);
+
+        if (foundNode2 != null) {
+            System.out.println("Found node with value " + searchNode2.getData() + " in the list.");
+        } else {
+            System.out.println("Did not find node with value " + searchNode2.getData() + " in the list.");
+        }
+        myList.Print();
+
+
+
+        System.out.println("Sorting the list...");
+        myList.Sort();
+
+
+// Print out the sorted list
+        myList.Print();
+
         System.out.println("-------------------------------------------------");
         System.out.println("Running functionality testing of CDLL");
 
@@ -215,6 +266,60 @@ public class Main {
 
         System.out.println("-------------------------------------------------");
         System.out.println("Running functionality testing of DLL");
+
+        // Create a new DLL
+        DNode head = new DNode(0);
+        DLL dll1 = new DLL(head);
+        System.out.println("New DLL using overloaded constructor  created.");
+
+        // Insert nodes at head
+        dll1.InsertHead(new DNode(9));
+        System.out.println("Inserted node with data = 9 at the head.");
+        dll1.InsertHead(new DNode(4));
+        System.out.println("Inserted node with data = 4 at the head.");
+        dll1.InsertHead(new DNode(18));
+        System.out.println("Inserted node with data = 18 at the head.");
+
+        // Insert nodes at tail
+        dll1.InsertTail(new DNode(41));
+        System.out.println("Inserted node with data = 41 at the tail.");
+        dll1.InsertTail(new DNode(51));
+        System.out.println("Inserted node with data = 51 at the tail.");
+        dll1.InsertTail(new DNode(61));
+        System.out.println("Inserted node with data = 61 at the tail.");
+
+        // Insert a node at a specific position
+        int position1 = 6;
+        dll1.Insert(new DNode(9), position1);
+        System.out.println("Inserted node with data = 9 at position " + position1 + ".");
+        dll1.Print();
+
+        // Search for a node
+        DNode node = dll1.Search(new DNode(41));
+        if (node != null) {
+            System.out.println("Search result: Node with data = " + node.getData() + " found.");
+        } else {
+            System.out.println("Search result: Node with data = 41 not found.");
+        }
+
+        // Delete a node
+        DNode nodeToDelete = new DNode(9);
+        dll1.Delete(nodeToDelete);
+        System.out.println("Deleted node with data = " + nodeToDelete.getData() + ".");
+
+        // Sort the list
+        dll1.Sort();
+        System.out.println("List sorted in ascending order.");
+
+        // Print the list
+        System.out.print("DLL content: ");
+        dll1.Print();
+
+        // Clear the list
+        dll1.Clear();
+        System.out.println("List cleared.");
+
+
 
 // Create a new DLL
         DLL dll = new DLL();
@@ -243,16 +348,16 @@ public class Main {
         dll.Print();
 
 // Search for a node
-        DNode node = dll.Search(new DNode(7));
-        if (node != null) {
-            System.out.println("Search result: Node with data = " + node.getData() + " found.");
+        DNode node2 = dll.Search(new DNode(7));
+        if (node2 != null) {
+            System.out.println("Search result: Node with data = " + node2.getData() + " found.");
         } else {
             System.out.println("Search result: Node with data = 7 not found.");
         }
 
 // Delete a node
-        DNode nodeToDelete = new DNode(2);
-        dll.Delete(nodeToDelete);
+        DNode nodeToDelete2 = new DNode(2);
+        dll.Delete(nodeToDelete2);
         System.out.println("Deleted node with data = " + nodeToDelete.getData() + ".");
 
 // Sort the list
@@ -268,7 +373,6 @@ public class Main {
         System.out.println("List cleared.");
         System.out.println("-------------------------------------------------");
         System.out.println("Finished running functionality testing of DLL.");
-
     }
 
     private static void testStackLL() {
@@ -514,7 +618,6 @@ public class Main {
     private static void testAVL() {
         System.out.println("Running functionality testing of AVL");
         System.out.println("-------------------------------------------------");
-        
         // create a new BST object
         AVL tree = new AVL();
 
@@ -531,10 +634,30 @@ public class Main {
         tree.printInOrder();
         System.out.println("\nPrinting in Breadth First Order:");
         tree.printBF();
+
+        // create an unbalanced tree
+        TNode unbalancedTree = new TNode(50);
+        unbalancedTree.setLeft(new TNode(30));
+        unbalancedTree.getLeft().setLeft(new TNode(20));
+        unbalancedTree.getLeft().setRight(new TNode(40));
+        unbalancedTree.setRight(new TNode(70));
+        unbalancedTree.getRight().setLeft(new TNode(60));
+        unbalancedTree.getRight().setRight(new TNode(80));
+
+        // create a new AVL tree from the unbalanced tree
+        AVL balancedTree = new AVL(unbalancedTree);
+
+
+        System.out.println("\nPrinting in order (balanced tree):");
+        balancedTree.printInOrder();
+        System.out.println("\nPrinting in Breadth First Order (balanced tree):");
+        balancedTree.printBF();
+
         System.out.println("Deleting from the tree...");
         tree.delete(30);
         System.out.println("Printing after deleting from the tree:");
         tree.printInOrder();
+
         // test the search function
         TNode node = tree.search(40);
         if (node != null) {

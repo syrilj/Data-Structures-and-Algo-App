@@ -1,6 +1,9 @@
 package myLib.datastructures.Linear;
 
 import myLib.datastructures.nodes.DNode;
+
+import java.util.HashSet;
+
 /**
 
  This class represents a circular doubly linked list (CDLL) that extends a doubly linked list (DLL).
@@ -27,7 +30,7 @@ public class CDLL extends DLL{
     public CDLL(DNode head){
         this.head = head;
         tail = null;
-        tracker = 1;
+        int tracker = 1;
         DNode current = head;
         if(current.getNext() != null) {
             while (current.getNext().getData() != head.getData()) {
@@ -36,8 +39,10 @@ public class CDLL extends DLL{
             }
         }
         current.setNext(this.head);
+        this.head.setPrevious(current);
         tail = current;
     }
+
 
     /**
      * Deletes the head node of the CDLL and updates the tail and tracker accordingly.
@@ -125,12 +130,14 @@ public class CDLL extends DLL{
             head.setNext(head);
         }else{
             tail.setNext(node);
+            node.setPrevious(tail);  // fix here
             node.setNext(head);
             head.setPrevious(node);
             tail = node;
         }
         tracker++;
     }
+
 
     @Override
     public void Insert(DNode node, int position) {
@@ -146,6 +153,10 @@ public class CDLL extends DLL{
             for (int i = 1; i < position - 1; i++) {
                 current = current.getNext();
             }
+            if (current.getNext().getData() == node.getData()) {
+                // node with same value already exists, do nothing
+                return;
+            }
             node.setNext(current.getNext());
             current.getNext().setPrevious(node);
             node.setPrevious(current);
@@ -153,6 +164,7 @@ public class CDLL extends DLL{
             tracker++;
         }
     }
+
 
     @Override
     public void SortedInsert(DNode node){
@@ -183,18 +195,18 @@ public class CDLL extends DLL{
     public DNode Search(DNode node){
         if(head == null){
             return null;
-        }else{
+        } else {
             DNode current = head;
-            while(current.getNext() != head && current.getData() != node.getData()){
+            do {
+                if(current.getData() == node.getData()){
+                    return current;
+                }
                 current = current.getNext();
-            }
-            if(current.getData() == node.getData()){
-                return current;
-            }else{
-                return null;
-            }
+            } while(current != head);
+            return null;
         }
     }
+
 
     @Override
     public boolean isSorted(){
@@ -213,18 +225,28 @@ public class CDLL extends DLL{
         }
     }
 
+//    @Override
+//    public DNode getTail() {
+//        return this.tail;
+//    }
+//    @Override
+//    public DNode getHead() {
+//        return this.head;
+//    }
+
+
     @Override
-    public void Sort(){
-        if(head == null){
+    public void Sort() {
+        if (head == null) {
             return;
-        }else{
+        } else {
             DNode current = head;
             DNode next = null;
             int temp;
-            while(current.getNext() != head){
+            while (current.getNext() != head) {
                 next = current.getNext();
-                while(next != head){
-                    if(current.getData() > next.getData()){
+                while (next != head) {
+                    if (current.getData() > next.getData()) {
                         temp = current.getData();
                         current.setData(next.getData());
                         next.setData(temp);
@@ -235,6 +257,21 @@ public class CDLL extends DLL{
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void Print() {
@@ -254,13 +291,22 @@ public class CDLL extends DLL{
             DNode current = head;
             System.out.print(current.getData());
             current = current.getNext();
-            while (current.getData() != head.getData()) {
+            while (current != null && current != head) {
+                if (current == tail) {
+                    System.out.print(" -> " + current.getData());
+                    break;
+                }
                 System.out.print(" -> " + current.getData());
                 current = current.getNext();
             }
             System.out.println();
         }
     }
+
+
+
+
+
 
     @Override
     public void Clear(){
