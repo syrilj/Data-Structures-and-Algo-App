@@ -119,9 +119,9 @@ public class AVL extends BST{
      * @param val The integer value to be added to the tree.
      */
     @Override
-    public void insert(int val) {
+    public void Insert(int val) {
         TNode nodeInsert = new TNode(val, 0, null, null, null);
-        insert(nodeInsert);
+        Insert(nodeInsert);
     }
 
 
@@ -132,8 +132,8 @@ public class AVL extends BST{
      * @param node
      */
     @Override
-    public void insert(TNode node){
-        super.insert(node);
+    public void Insert(TNode node){
+        super.Insert(node);
         super.getRoot().setBalance(getBalancingFactor(super.getRoot()));
         // Balance after inserting
         fullBalance(super.getRoot());
@@ -145,8 +145,8 @@ public class AVL extends BST{
      * @param node
      */
     @Override
-    public void delete(TNode node){
-        super.delete(node);
+    public void Delete(TNode node){
+        super.Delete(node);
         super.getRoot().setBalance(getBalancingFactor(super.getRoot()));
         // Balance after deleting
         fullBalance(super.getRoot());

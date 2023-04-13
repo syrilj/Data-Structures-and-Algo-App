@@ -83,6 +83,7 @@ public class App {
                     break;
                 case 13:
                     System.out.println("Exiting...");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid choice.");
@@ -600,13 +601,13 @@ public class App {
         BST tree = new BST();
 
         // insert some nodes into the tree
-        tree.insert(50);
-        tree.insert(30);
-        tree.insert(20);
-        tree.insert(40);
-        tree.insert(70);
-        tree.insert(60);
-        tree.insert(80);
+        tree.Insert(50);
+        tree.Insert(30);
+        tree.Insert(20);
+        tree.Insert(40);
+        tree.Insert(70);
+        tree.Insert(60);
+        tree.Insert(80);
 
         //Printing in order
         System.out.println("Printing in order:");
@@ -616,7 +617,7 @@ public class App {
         tree.printBF();
 
         // testing the search function
-        TNode node = tree.search(40);
+        TNode node = tree.Search(40);
         if (node != null) {
             System.out.println("Searching for 40... \n" + node.data + " was found in the tree");
         } else {
@@ -624,7 +625,7 @@ public class App {
         }
 
         // test the delete function
-        tree.delete(20);
+        tree.Delete(20);
         System.out.println("Ordered Traversal after deletion: ");
         tree.printInOrder();
 
@@ -638,12 +639,12 @@ public class App {
         AVL tree = new AVL(20);
 
         // insert some nodes into the tree
-        tree.insert(50);
-        tree.insert(30);
-        tree.insert(40);
-        tree.insert(70);
-        tree.insert(60);
-        tree.insert(80);
+        tree.Insert(50);
+        tree.Insert(30);
+        tree.Insert(40);
+        tree.Insert(70);
+        tree.Insert(60);
+        tree.Insert(80);
 
         System.out.println("Printing in order:");
         tree.printInOrder();
@@ -669,12 +670,12 @@ public class App {
         balancedTree.printBF();
 
         System.out.println("Deleting from the tree...");
-        tree.delete(30);
+        tree.Delete(30);
         System.out.println("Printing after deleting from the tree:");
         tree.printInOrder();
 
         // test the search function
-        TNode node = tree.search(40);
+        TNode node = tree.Search(40);
         if (node != null) {
             System.out.println("\nSearch for 40: \n" + node.data + " was found in the tree");
         } else {
