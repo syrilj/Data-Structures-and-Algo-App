@@ -9,7 +9,7 @@ public abstract class Heap {
      * Constructors
      */
     public Heap() {
-        elements = new Vector<Integer>();
+        elements = new Vector<>();
     }
 
     /**
@@ -94,12 +94,21 @@ public abstract class Heap {
         }
     }
 
+    /**
+     * Moves the element at the given index up the heap as necessary to maintain the heap property
+     * @param i the index of the element to move up
+     */
     protected void heapifyUp(int i) {
-        while (i > 0 && compare(elements.get(i), elements.get((i - 1) / 2))) {
-            swap(i, (i - 1) / 2);
-            i = (i - 1) / 2;
+        int parentIndex = parent(i);
+        while (i > 0 && compare(elements.get(i), elements.get(parentIndex))) {
+            swap(i, parentIndex);
+            i = parentIndex;
+            parentIndex = parent(i);
         }
     }
+
+
+
 
 
     /**
@@ -176,15 +185,38 @@ public abstract class Heap {
     /**
      * displays the content of the heap vector over 2 lines. First line is the index of the
      * parent of each element.
+     *
+     * @return
      */
     public void print() {
+        StringBuilder parentIndexes = new StringBuilder("-1 ");
+        StringBuilder elementsLine = new StringBuilder(elements.get(0) + " ");
+
         for (int i = 1; i < elements.size(); i++) {
-            System.out.printf("%-3s", parent(i));
+            int parentIndex;
+            if (i % 2 == 0) {
+                parentIndex = parent(i);
+            } else {
+                parentIndex = parent(i - 1);
+            }
+            parentIndexes.append(parentIndex).append(" ");
+
+            elementsLine.append(elements.get(i)).append(" ");
+
+            // Update the top row if it's the last element of the bottom row
+            if (i == elements.size() - 1) {
+                parentIndexes.append(parentIndex).append(" ");
+            }
         }
-        System.out.println();
-        for (int i = 0; i < elements.size(); i++) {
-            System.out.printf("%-3s", elements.get(i));
-        }
-        System.out.println();
+        System.out.println(parentIndexes.toString().trim());
+        System.out.println(elementsLine.toString().trim());
     }
+
+
+
+
+
+
+
+
 }

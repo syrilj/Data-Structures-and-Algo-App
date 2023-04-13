@@ -1,5 +1,7 @@
 package myLib.datastructures.Heap;
 
+import java.util.Vector;
+
 public class MaxH extends Heap {
 
     public MaxH() {
@@ -10,37 +12,52 @@ public class MaxH extends Heap {
         super(size);
     }
 
+    @Override
+    public void insert(Integer key) {
+        super.insert(key);
+    }
+
     public MaxH(int[] array) {
         super(array);
     }
-@Override
+
+    @Override
     protected boolean compare(int a, int b) {
         return a > b;
     }
 
-    public int peekMax() {
-        if (isEmpty()) {
+    /**
+     * Returns the maximum element in the heap
+     * @return
+     */
+    public int getMax() {
+        if (elements.isEmpty()) {
             throw new IllegalStateException("Heap is empty");
         }
         return elements.get(0);
     }
 
+    /**
+     * Removes and returns the maximum element in the heap
+     * @return
+     */
     public int extractMax() {
-        if (isEmpty()) {
+        if (elements.isEmpty()) {
             throw new IllegalStateException("Heap is empty");
         }
         int max = elements.get(0);
         elements.set(0, elements.get(elements.size() - 1));
         elements.remove(elements.size() - 1);
-        heapifyDown(1);
+        heapifyDown(0);
         return max;
     }
 
-
+    /**
+     * Increases the value of the element at the given index to the given value
+     * @param i
+     * @param key
+     */
     public void increaseKey(int i, int key) {
-        if (i < 0 || i >= elements.size()) {
-            throw new IndexOutOfBoundsException("Invalid index: " + i);
-        }
         if (key < elements.get(i)) {
             throw new IllegalArgumentException("New key is smaller than current key");
         }
@@ -48,43 +65,18 @@ public class MaxH extends Heap {
         heapifyUp(i);
     }
 
-    public void insert(int key) {
-        super.insert(key);
-    }
-
-    public void delete(int key) {
-        super.delete(key);
-    }
-
-    public void sortDescending() {
-        sort();
-    }
-
-    public void sortAscending() {
-        int n = elements.size();
-        for (int i = n / 2 - 1; i >= 0; i--) {
-            heapifyDown(i);
-        }
-        for (int i = n - 1; i >= 0; i--) {
-            swap(0, i);
-            heapifyDown(0, i);
-        }
-    }
-
-    protected void heapifyDown(int i, int end) {
-        int left = left(i);
-        int right = right(i);
-        int largest = i;
-        if (left < end && compare(elements.get(left), elements.get(largest))) {
-            largest = left;
-        }
-        if (right < end && compare(elements.get(right), elements.get(largest))) {
-            largest = right;
-        }
-        if (largest != i) {
-            swap(i, largest);
-            heapifyDown(largest, end);
-        }
+    /**
+     * displays the content of the heap vector over 2 lines. First line is the index of the
+     * parent of each element.
+     */
+    /**
+     * displays the content of the heap vector over 2 lines. First line is the index of the
+     * parent of each element.
+     *
+     * @return
+     */
+    public void print() {
+        super.print();
     }
 
 

@@ -77,7 +77,6 @@ public class Main {
                     System.out.println("Testing Min Heap (MinH)");
                     testMinH();
                     break;
-
                 case 12:
                     System.out.println("Testing Graph Structures");
                     testGraph();
@@ -692,22 +691,35 @@ public class Main {
         System.out.println("Running functionality testing of MaxH");
         System.out.println("-------------------------------------------------");
         MaxH maxHeap = new MaxH();
+
+        // Insert elements
         maxHeap.insert(15);
         maxHeap.insert(10);
         maxHeap.insert(14);
         maxHeap.insert(7);
         maxHeap.insert(5);
+        maxHeap.insert(12);
         maxHeap.insert(1);
-        maxHeap.insert(8);
-        maxHeap.insert(19);
 
-        // print the contents of the MaxH heap
-        System.out.println("MaxH heap:");
+        // Print the heap
         maxHeap.print();
-        System.out.println("Peek max: " + maxHeap.peekMax()); // should print 10
-        System.out.println("Extract max: " + maxHeap.extractMax()); // should print 10
-        System.out.println("After extracting max:");
-        maxHeap.print();
+
+        // Test getMax()
+        System.out.println("Max element: " + maxHeap.getMax());
+
+        // Test extractMax()
+        int max = maxHeap.extractMax();
+        System.out.println("Extracted max element: " + max);
+        System.out.println("New max element: " + maxHeap.getMax());
+
+
+        maxHeap.increaseKey(1, 15);
+        System.out.println("New max element after increasing key: " + maxHeap.getMax());
+
+
+        maxHeap.increaseKey(1, 15);
+        System.out.println("New max element after increasing key: " + maxHeap.getMax()); // Output: 15
+
 
         System.out.println("\n-------------------------------------------------");
         System.out.println("Finished running functionality testing of MaxH\n");
@@ -715,20 +727,30 @@ public class Main {
     private static void testMinH(){
         System.out.println("Running functionality testing of MinH");
         System.out.println("-------------------------------------------------");
-        // create a MinH heap and add elements
+
         MinH minHeap = new MinH();
+
+        // Insert elements
         minHeap.insert(15);
         minHeap.insert(10);
         minHeap.insert(14);
         minHeap.insert(7);
-        minHeap.insert(5);
-
-        // print the contents of the MinH heap
-        System.out.println("Peek min: " + minHeap.peekMin()); // should print 1
-        System.out.println("Extract min: " + minHeap.extractMin()); // should print
+        minHeap.insert(12);
         minHeap.print();
+        System.out.println("Min element: " + minHeap.getMin());
 
-        System.out.println("\n-------------------------------------------------");
+
+        int min = minHeap.extractMin();
+        System.out.println("Extracted min element: " + min);
+        System.out.println("New min element: " + minHeap.getMin());
+        try {
+            minHeap.decreaseKey(0, 5);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("New min element after decreasing key: " + minHeap.getMin());
+        minHeap.print();
+        System.out.println("-------------------------------------------------");
         System.out.println("Finished running functionality testing of MinH\n");
     }
 
