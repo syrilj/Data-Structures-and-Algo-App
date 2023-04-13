@@ -9,7 +9,7 @@ import myLib.datastructures.Trees.*;
 import myLib.datastructures.Graphalgo.*;
 import myLib.datastructures.Heap.*;
 
-public class Main {
+public class App {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
