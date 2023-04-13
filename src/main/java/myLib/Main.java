@@ -495,10 +495,17 @@ public class Main {
         tree.insert(60);
         tree.insert(80);
 
-        // test the search function
+        //Printing in order
+        System.out.println("Printing in order:");
+        tree.printInOrder();
+        //Printintg in breadth first form
+        System.out.println("\nPrinting in Breadth First Order:");
+        tree.printBF();
+
+        // testing the search function
         TNode node = tree.search(40);
         if (node != null) {
-            System.out.println("Search for 40: \n" + node.data + " was found in the tree");
+            System.out.println("Searching for 40... \n" + node.data + " was found in the tree");
         } else {
             System.out.println("Value not found in tree");
         }
