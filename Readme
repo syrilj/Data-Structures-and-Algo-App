@@ -1,11 +1,10 @@
-# Foobar
 ENSF 338 FINAL PROJECT
 
-## Objective
+Objective
 
 The objective of this project is to create a library for common data structures and their associated algorithms. The library will include linear data structures, tree structures, vector-based heaps, and graph algorithms. The library will be implemented using either Java or Python.
 
-## Implemention
+Implemention
 
 The library will be created with a package name "myLib" and will have a multilevel structure to separate each group of data structures into groups based on their class. The library will split into two main subfolders: "Datastructures" and "Graphalgo".
 
@@ -13,7 +12,8 @@ The "Datastructures" folder will contain subfolders for each class of data struc
 
 The "Graphalgo" folder will have a static class with static methods that apply the different graph algorithms mentioned.
 
-## Testing
+Testing
+
 To test all functionalities of the data structure we write a main app program that will comprehensively test the data structures .
 
 Group members:
@@ -22,7 +22,6 @@ Syril Jacob UCID 30145947
 
 
 We finished the assignments and attempted all the bonuses including
-    - Using Generic data types
     - AVL Balancing constructor
     - AVL delete with balancing updates
     - Implementing module 3 which was the heaps section
