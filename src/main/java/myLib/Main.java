@@ -6,8 +6,8 @@ import myLib.datastructures.nodes.TNode;
 import myLib.datastructures.Linear.*;
 import myLib.datastructures.Linear.DLL;
 import myLib.datastructures.Trees.*;
+import myLib.datastructures.Graphalgo.*;
 import myLib.datastructures.Heap.*;
-import myLib.datastructures.Graph.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -760,7 +760,7 @@ public class Main {
         System.out.println("-------------------------------------------------");
 
         // create a graph with 5 vertices and 6 edges
-        Graph graph = new Graph();
+        Graphalgo graph = new Graphalgo();
         for (int i = 0; i < 5; i++) {
             graph.addVertex(i);
         }
