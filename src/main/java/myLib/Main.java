@@ -176,32 +176,33 @@ public class Main {
     private static void testCDLL() {
         System.out.println("-------------------------------------------------");
         System.out.println("Running functionality testing of CDLL");
-        System.out.println("CDLL base constructor");
+        // create a new CDLL
         CDLL list = new CDLL();
-        // insert nodes into list
+
+    // insert nodes into the list
         list.InsertTail(new DNode(10));
         list.InsertTail(new DNode(20));
         list.InsertTail(new DNode(30));
         list.InsertTail(new DNode(40));
-        list.InsertHead(new DNode(5));
         list.Insert(new DNode(15), 3);
+        list.SortedInsert(new DNode(5));
 
-        System.out.println("Inserting 5, 10, 15, 20, 30, and 40 into the list...");
+        System.out.println("Inserting 10, 20, 30, 40, 15, and 5 into the list...");
 
-        // print out the list
+    // print out the list
         list.Print();
 
-        // delete nodes from list
+// delete nodes from the list
         list.DeleteHead();
         list.DeleteTail();
         list.Delete(new DNode(15));
 
         System.out.println("Deleting the head, tail, and node with value 15 from the list...");
 
-        // print out the updated list
+// print out the updated list
         list.Print();
 
-
+// search for a node in the list
         DNode searchNode = new DNode(20);
         DNode foundNode = list.Search(searchNode);
 
@@ -211,45 +212,40 @@ public class Main {
             System.out.println("Did not find node with value " + searchNode.getData() + " in the list.");
         }
 
-        // sort the list
-
+// sort the list
+        list.Sort();
 
         System.out.println("Sorting the list...");
 
-        list.Sort();
-
-        // print out the sorted list
+// print out the sorted list
         list.Print();
 
-
-
+// create a new CDLL with a head node
         DNode headNode = new DNode(10);
         CDLL myList = new CDLL(headNode);
 
-// Insert nodes into the list
+// insert nodes into the list
         myList.InsertTail(new DNode(20));
-        myList.InsertTail( new DNode(30));
+        myList.InsertTail(new DNode(30));
         myList.Insert(new DNode(15), 2);
         myList.SortedInsert(new DNode(5));
 
+        System.out.println("Inserting 20, 30, 15, and 5 into the list...");
 
-        System.out.println("Inserting 10, 20, 15, 20, and 30 into the list...");
-
-
-// Print out the list
+// print out the list
         myList.Print();
 
-// Delete nodes from the list
+// delete nodes from the list
         myList.DeleteHead();
         myList.DeleteTail();
         myList.Delete(new DNode(15));
 
         System.out.println("Deleting the head, tail, and node with value 15 from the list...");
 
-// Print out the updated list
+// print out the updated list
         myList.Print();
 
-
+// search for a node in the list
         DNode searchNode2 = new DNode(20);
         DNode foundNode2 = myList.Search(searchNode2);
 
@@ -258,16 +254,19 @@ public class Main {
         } else {
             System.out.println("Did not find node with value " + searchNode2.getData() + " in the list.");
         }
-        myList.Print();
 
+        System.out.println("Sorting the list...");
 
-        System.out.println("sorting list");
+// sort the list
         myList.Sort();
 
-
-// Print out the sorted list
+// print out the sorted list
         myList.Print();
 
+
+        myList.Clear();
+        System.out.println("Clearing the list... Should say List Content Empty");
+        myList.Print();
         System.out.println("-------------------------------------------------");
         System.out.println("Running functionality testing of CDLL");
 
