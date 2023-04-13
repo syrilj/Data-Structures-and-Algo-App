@@ -635,12 +635,11 @@ public class Main {
         System.out.println("Running functionality testing of AVL");
         System.out.println("-------------------------------------------------");
         // create a new BST object
-        AVL tree = new AVL();
+        AVL tree = new AVL(20);
 
         // insert some nodes into the tree
         tree.insert(50);
         tree.insert(30);
-        tree.insert(20);
         tree.insert(40);
         tree.insert(70);
         tree.insert(60);
@@ -681,8 +680,6 @@ public class Main {
         } else {
             System.out.println("Value not found in tree");
         }
-
-        
 
         System.out.println("\n-------------------------------------------------");
         System.out.println("Finished running functionality testing of AVL");
