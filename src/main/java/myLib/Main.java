@@ -104,6 +104,7 @@ public class Main {
         testAVL();
         testMaxH();
         testMinH();
+        testGraph();
     }
 
     private static void testCSLL() {
@@ -686,6 +687,8 @@ public class Main {
         System.out.println("Finished running functionality testing of AVL");
     }
     private static void testMaxH(){
+        System.out.println("Running functionality testing of MaxH");
+        System.out.println("-------------------------------------------------");
         MaxH maxHeap = new MaxH();
         maxHeap.insert(15);
         maxHeap.insert(10);
@@ -704,9 +707,12 @@ public class Main {
         System.out.println("After extracting max:");
         maxHeap.print();
 
+        System.out.println("\n-------------------------------------------------");
+        System.out.println("Finished running functionality testing of MaxH\n");
     }
     private static void testMinH(){
-
+        System.out.println("Running functionality testing of MinH");
+        System.out.println("-------------------------------------------------");
         // create a MinH heap and add elements
         MinH minHeap = new MinH();
         minHeap.insert(15);
@@ -719,6 +725,9 @@ public class Main {
         System.out.println("Peek min: " + minHeap.peekMin()); // should print 1
         System.out.println("Extract min: " + minHeap.extractMin()); // should print
         minHeap.print();
+
+        System.out.println("\n-------------------------------------------------");
+        System.out.println("Finished running functionality testing of MinH\n");
     }
 
 
