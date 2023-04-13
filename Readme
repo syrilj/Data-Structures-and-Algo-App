@@ -14,16 +14,13 @@ The "Graphalgo" folder will have a static class with static methods that apply t
 
 Testing
 
-To test all functionalities of the data structure we write a main app program that will comprehensively test the data structures .
+To test all functionalities of the data structure we wrote a main app program that will comprehensively test the data structures .
 
 Group members:
-<<<<<<< HEAD
-Prosper Ademoye
-Syril Jacob UCID 30145947
-=======
-Prosper Ademoye(30143058)
-Syril Jacob
->>>>>>> 2e12c1d (fixed the exit and also changed the capitals)
+
+Syril Jacob UCID: 30145947
+Prosper Ademoye UCID: 30143058
+
 
 
 We finished the assignments and attempted all the bonuses including
