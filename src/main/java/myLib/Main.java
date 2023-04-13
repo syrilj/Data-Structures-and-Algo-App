@@ -212,9 +212,11 @@ public class Main {
         }
 
         // sort the list
-        list.Sort();
+
 
         System.out.println("Sorting the list...");
+
+        list.Sort();
 
         // print out the sorted list
         list.Print();
@@ -226,11 +228,13 @@ public class Main {
 
 // Insert nodes into the list
         myList.InsertTail(new DNode(20));
-        myList.InsertTail(new DNode(30));
-        myList.InsertHead(new DNode(5));
+        myList.InsertTail( new DNode(30));
         myList.Insert(new DNode(15), 2);
+        myList.SortedInsert(new DNode(5));
+
 
         System.out.println("Inserting 10, 20, 15, 20, and 30 into the list...");
+
 
 // Print out the list
         myList.Print();
@@ -257,8 +261,7 @@ public class Main {
         myList.Print();
 
 
-
-        System.out.println("Sorting the list...");
+        System.out.println("sorting list");
         myList.Sort();
 
 

@@ -27,52 +27,58 @@ public class CDLL extends DLL{
      *
      * @param head the head node of the CDLL
      */
-    public CDLL(DNode head){
-        this.head = head;
-        tail = null;
-        int tracker = 1;
-        DNode current = head;
-        if(current.getNext() != null) {
-            while (current.getNext().getData() != head.getData()) {
-                current = current.getNext();
-                tracker++;
-            }
+    /**
+     * Constructs a CDLL with a specified head node and initializes the tail node and tracker accordingly.
+     *
+     * @param head the head node of the CDLL
+     */
+    public CDLL(DNode head) {
+        this.head = null;
+        this.tail = null;
+        this.tracker = 0;
+        if (head != null) {
+            this.SortedInsert(head);
         }
-        current.setNext(this.head);
-        this.head.setPrevious(current);
-        tail = current;
     }
+
+
+
+
+
+
 
 
     /**
      * Deletes the head node of the CDLL and updates the tail and tracker accordingly.
      */
+
     @Override
-    public void DeleteHead(){
-        if(head == null){
+    public void DeleteHead() {
+        if (head == null) {
             return;
-        }else{
+        } else if (head == tail) {
+            head = tail = null;
+        } else {
             head.getNext().setPrevious(tail);
+            tail.setNext(head.getNext());
             head = head.getNext();
-            tail.setNext(head);
             tracker--;
         }
     }
+
     /**
      * Deletes the tail node of the CDLL and updates the head and tracker accordingly.
      */
     @Override
-    public void DeleteTail(){
-        if(head == null){
+    public void DeleteTail() {
+        if (tail == null) {
             return;
-        }else{
-            DNode current = head;
-            while(current.getNext() != tail){
-                current = current.getNext();
-            }
-            current.setNext(head);
-            tail = current;
-            head.setPrevious(tail);
+        } else if (tail == head) {
+            tail = head = null;
+        } else {
+            tail.getPrevious().setNext(head);
+            head.setPrevious(tail.getPrevious());
+            tail = tail.getPrevious();
             tracker--;
         }
     }
@@ -81,22 +87,28 @@ public class CDLL extends DLL{
      *
      * @param node the node to delete from the CDLL
      */
-    @Override
-    public void Delete(DNode node){
-        if(head == null){
+
+    public void Delete(DNode node) {
+        if (head == null) {
             return;
-        }else{
+        } else if (head == tail) {
+            if (head == node) {
+                head = tail = null;
+                tracker--;
+            }
+        } else {
             DNode current = head;
-            while(current.getNext() != head && current.getNext().getData() != node.getData()){
+            while (current != tail && current.getNext() != node) {
                 current = current.getNext();
             }
-            if(current.getNext().getData() == node.getData()){
-                current.setNext(current.getNext().getNext());
-                current.getNext().setPrevious(current);
+            if (current.getNext() == node) {
+                current.setNext(node.getNext());
+                node.getNext().setPrevious(current);
                 tracker--;
             }
         }
     }
+
 
 
     /**
@@ -105,20 +117,23 @@ public class CDLL extends DLL{
      * @param node the node to insert at the head of the CDLL
      */
     @Override
-    public void InsertHead(DNode node){
-        if(head == null){
+    public void InsertHead(DNode node) {
+        if (head == null) {
             head = node;
             tail = node;
             head.setNext(head);
             head.setPrevious(head);
-        }else{
+        } else {
             node.setNext(head);
-            tail.setNext(node);
+            head.setPrevious(node);
             node.setPrevious(tail);
+            tail.setNext(node);
             head = node;
+
         }
         tracker++;
     }
+
     /**
      * Inserts a node at the tail of the CDLL and updates the tracker accordingly.
      */
@@ -130,14 +145,19 @@ public class CDLL extends DLL{
             head.setNext(head);
         }else{
             tail.setNext(node);
-            node.setPrevious(tail);  // fix here
-            node.setNext(head);
+            node.setPrevious(tail);
+            node.setNext(head);  // fix here
             head.setPrevious(node);
             tail = node;
         }
         tracker++;
     }
 
+    /**
+     * insert with node and positon
+     * @param node     the node to be inserted
+     * @param position the position at which to insert the node (1-based)
+     */
 
     @Override
     public void Insert(DNode node, int position) {
@@ -153,44 +173,57 @@ public class CDLL extends DLL{
             for (int i = 1; i < position - 1; i++) {
                 current = current.getNext();
             }
-            if (current.getNext().getData() == node.getData()) {
-                // node with same value already exists, do nothing
+            DNode nextNode = current.getNext();
+            if (nextNode == node) {
+                // node with same object reference already exists, do nothing
                 return;
             }
-            node.setNext(current.getNext());
-            current.getNext().setPrevious(node);
+            node.setNext(nextNode);
+            nextNode.setPrevious(node);
             node.setPrevious(current);
             current.setNext(node);
             tracker++;
         }
     }
 
-
+    /**
+     * sorts it when perfoming the insert
+     * @param node the node to be inserted
+     */
     @Override
-    public void SortedInsert(DNode node){
-        if(head == null){
+    public void SortedInsert(DNode node) {
+        if (head == null) {
             head = node;
             tail = node;
             head.setNext(head);
-        }else{
-            if(!isSorted()){
-                Sort();
-            }
+        } else {
             DNode current = head;
-            while(current.getNext() != head && current.getNext().getData() < node.getData()){
+            while (current.getNext() != head && current.getNext().getData() < node.getData()) {
                 current = current.getNext();
             }
             node.setNext(current.getNext());
             node.setPrevious(current);
             current.getNext().setPrevious(node);
             current.setNext(node);
-            if(current == tail){
+            if (current == tail) {
                 tail = node;
             }
+            Sort(); // Sort the list again after inserting the new node
         }
         tracker++;
+        Sort();
     }
 
+
+
+
+
+
+    /**
+     * searches for the node needed
+     * @param node the node to search for
+     * @return
+     */
     @Override
     public DNode Search(DNode node){
         if(head == null){
@@ -207,72 +240,75 @@ public class CDLL extends DLL{
         }
     }
 
-
+    /**
+     * useful helper boolean to see if its true or not for sort status
+     * @return
+     */
     @Override
-    public boolean isSorted(){
-        if(head == null){
+    public boolean isSorted() {
+        if (head == null) {
             return true;
-        }else{
-            DNode current = head;
-            while(current.getNext() != head && current.getData() <= current.getNext().getData()){
-                current = current.getNext();
-            }
-            if(current.getNext() == head){
-                return true;
-            }else{
+        }
+        DNode current = head;
+        while (current.getNext() != head) {
+            if (current.getData() > current.getNext().getData()) {
                 return false;
             }
+            current = current.getNext();
         }
+        return true;
     }
 
-//    @Override
-//    public DNode getTail() {
-//        return this.tail;
-//    }
-//    @Override
-//    public DNode getHead() {
-//        return this.head;
-//    }
+    /**
+     * keeps track of the size so we don't get infinite loops for some methods
+     * @return
+     */
+    private int GetSize() {
+        return this.tracker;
+    }
 
-
+    /**
+     * keeps track of size and sorts it using conditional checks, so we don't get endless loops
+     */
     @Override
     public void Sort() {
-        if (head == null) {
+        if (head == null || head.getNext() == null) {
             return;
-        } else {
+        }
+
+        int size = GetSize();
+        boolean isSorted = false;
+        while (!isSorted) {
+            isSorted = true;
             DNode current = head;
-            DNode next = null;
-            int temp;
-            while (current.getNext() != head) {
-                next = current.getNext();
-                while (next != head) {
-                    if (current.getData() > next.getData()) {
-                        temp = current.getData();
-                        current.setData(next.getData());
-                        next.setData(temp);
+            for (int i = 0; i < size - 1; i++) {
+                if (current.getData() > current.getNext().getData()) {
+                    DNode temp = current.getNext();
+                    current.setNext(temp.getNext());
+                    temp.getNext().setPrevious(current);
+                    temp.setPrevious(current.getPrevious());
+                    current.getPrevious().setNext(temp);
+                    current.setPrevious(temp);
+                    temp.setNext(current);
+                    if (current == head) {
+                        head = temp;
                     }
-                    next = next.getNext();
+                    if (temp.getNext() == head) {
+                        tail = temp;
+                    }
+                    isSorted = false;
+                } else {
+                    current = current.getNext();
                 }
-                current = current.getNext();
             }
         }
     }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * prints in readable format
+     */
     @Override
     public void Print() {
         System.out.println("List length: " + tracker);
@@ -304,9 +340,9 @@ public class CDLL extends DLL{
     }
 
 
-
-
-
+    /**
+     * clears the whole thing
+     */
 
     @Override
     public void Clear(){
