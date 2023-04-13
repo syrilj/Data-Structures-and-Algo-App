@@ -7,6 +7,7 @@ import myLib.datastructures.Linear.*;
 import myLib.datastructures.Linear.DLL;
 import myLib.datastructures.Trees.*;
 import myLib.datastructures.Heap.*;
+import myLib.datastructures.Graph.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,9 +25,10 @@ public class Main {
             System.out.println("7. Test Circular Singly Linked List (CSLL)");
             System.out.println("8. Test Binary Search Tree (BST)");
             System.out.println("9. Test AVL Tree (AVL)");
-            System.out.println("10. Test Max Heap (MaxH)");
+            System.out.println("10. Test Max ra (MaxH)");
             System.out.println("11. Test Min Heap (MinH)");
-            System.out.println("12. Exit");
+            System.out.println("12. Test Graph Structures");
+            System.out.println("13. Exit");
             System.out.print("Enter your choice: ");
             choice = input.nextInt();
 
@@ -75,7 +77,12 @@ public class Main {
                     System.out.println("Testing Min Heap (MinH)");
                     testMinH();
                     break;
+
                 case 12:
+                    System.out.println("Testing Graph Structures");
+                    testGraph();
+                    break;
+                case 13:
                     System.out.println("Exiting...");
                     break;
                 default:
@@ -590,6 +597,42 @@ public class Main {
         System.out.println("Extract min: " + minHeap.extractMin()); // should print
         minHeap.print();
     }
+
+
+    private static void testGraph(){
+        System.out.println("Running functionality testing of Graph");
+        System.out.println("-------------------------------------------------");
+
+        // create a graph with 5 vertices and 6 edges
+        Graph graph = new Graph();
+        for (int i = 0; i < 5; i++) {
+            graph.addVertex(i);
+        }
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+        graph.addEdge(1, 2);
+        graph.addEdge(2, 0);
+        graph.addEdge(2, 3);
+        graph.addEdge(3, 3);
+
+        // test dfs method
+        System.out.println("DFS traversal of the graph:");
+        graph.dfs();
+        System.out.println();
+
+        // test bfs method
+        System.out.println("BFS traversal of the graph:");
+        graph.bfs();
+        System.out.println();
+
+        // test dijkstra method
+        System.out.println("Dijkstra's algorithm from vertex 0:");
+        graph.dijkstra(0);
+
+        System.out.println("\n-------------------------------------------------");
+        System.out.println("Finished running functionality testing of Graph\n");
+    }
+
 }
 
 
