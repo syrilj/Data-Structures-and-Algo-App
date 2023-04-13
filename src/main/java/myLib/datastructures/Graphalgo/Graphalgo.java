@@ -1,4 +1,4 @@
-package myLib.datastructures.Graph;
+package myLib.datastructures.Graphalgo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,18 +16,18 @@ class GraphNode {
     }
 }
 
-public class Graph {
+public class Graphalgo {
     int order; // number of vertices in the graph
     int size; // number of edges in the graph
     ArrayList<GraphNode> vertices;
     
-    public Graph() {
+    public Graphalgo() {
         this.order = 0;
         this.size = 0;
         this.vertices = new ArrayList<>();
     }
     
-    public Graph(GraphNode vertex) {
+    public Graphalgo(GraphNode vertex) {
         this.order = 1;
         this.size = 0;
         this.vertices = new ArrayList<>();
