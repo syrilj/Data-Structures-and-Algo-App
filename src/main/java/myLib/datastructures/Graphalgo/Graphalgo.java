@@ -1,25 +1,17 @@
 package myLib.datastructures.Graphalgo;
-
+import myLib.datastructures.nodes.GraphNode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-class GraphNode {
-    int val;
-    ArrayList<GraphNode> neighbors;
-    
-    public GraphNode(int val) {
-        this.val = val;
-        this.neighbors = new ArrayList<>();
-    }
-}
+
 
 public class Graphalgo {
-    int order; // number of vertices in the graph
-    int size; // number of edges in the graph
-    ArrayList<GraphNode> vertices;
+    public int order; // number of vertices in the graph
+    public int size; // number of edges in the graph
+    public ArrayList<GraphNode> vertices;
     
     public Graphalgo() {
         this.order = 0;

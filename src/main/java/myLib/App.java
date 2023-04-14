@@ -678,7 +678,7 @@ public class App {
         System.out.println("Running functionality testing of AVL");
         System.out.println("-------------------------------------------------");
         // create a new BST object
-        AVL tree = new AVL(20);
+        AVL tree = new AVL();
 
         // insert some nodes into the tree
         tree.Insert(50);
@@ -687,11 +687,38 @@ public class App {
         tree.Insert(70);
         tree.Insert(60);
         tree.Insert(80);
+        System.out.println("Printing after inserting values...");
+        System.out.println("Printing in order:");
+        tree.printInOrder();
+        System.out.println("\nPrinting in Breadth First Order:");
+        tree.printBF();
+
+
+
+        System.out.println("Deleting everything from the tree...");
+        tree.Delete(50);
+        tree.Delete(30);
+        tree.Delete(40);
+        tree.Delete(70);
+        tree.Delete(60);
+        tree.Delete(80);
+        tree.printBF();
+
+        System.out.println("Reinserting into the tree...");
+        tree.Insert(50);
+        tree.Insert(30);
+        tree.Insert(40);
+        tree.Insert(70);
+        tree.Insert(60);
+        tree.Insert(80);
+
 
         System.out.println("Printing in order:");
         tree.printInOrder();
         System.out.println("\nPrinting in Breadth First Order:");
         tree.printBF();
+
+
 
         // create an unbalanced tree
         TNode unbalancedTree = new TNode(50);

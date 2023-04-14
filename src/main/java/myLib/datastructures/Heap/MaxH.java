@@ -1,6 +1,5 @@
 package myLib.datastructures.Heap;
 
-import java.util.Vector;
 
 public class MaxH extends Heap {
 
