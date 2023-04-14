@@ -10,30 +10,6 @@ import myLib.datastructures.nodes.DNode;
  */
 
 public class CSLL extends SLL{
-    @Override
-    public DNode getHead() {
-        return head;
-    }
-    public void setHead(DNode head) {
-        this.head = head;
-    }
-
-    @Override
-    public DNode getTail() {
-        return tail;
-    }
-
-    public void setTail(DNode tail) {
-        this.tail = tail;
-    }
-    public int getSize(){
-        return this.size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
     private DNode head;
     private DNode tail;
     private int size;
@@ -329,5 +305,28 @@ public class CSLL extends SLL{
         head = null;
         tail = null;
         size = 0;
+    }
+    @Override
+    public DNode getHead() {
+        return head;
+    }
+    public void setHead(DNode head) {
+        this.head = head;
+    }
+
+    @Override
+    public DNode getTail() {
+        return tail;
+    }
+
+    public void setTail(DNode tail) {
+        this.tail = tail;
+    }
+    public int getSize(){
+        return this.size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 }

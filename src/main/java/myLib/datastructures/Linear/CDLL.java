@@ -11,31 +11,6 @@ public class CDLL extends DLL{
     private DNode head;
     private DNode tail;
     private int tracker;
-    @Override
-    public DNode getHead() {
-        return head;
-    }
-
-    public void setHead(DNode head) {
-        this.head = head;
-    }
-
-    @Override
-    public DNode getTail() {
-        return tail;
-    }
-
-    public void setTail(DNode tail) {
-        this.tail = tail;
-    }
-
-    public int getTracker() {
-        return tracker;
-    }
-
-    public void setTracker(int tracker) {
-        this.tracker = tracker;
-    }
 
     /**
      * Constructs an empty CDLL with null head and tail sentinel nodes and a tracker of 0.
@@ -383,6 +358,31 @@ public class CDLL extends DLL{
         head = null;
         tail = null;
         tracker = 0;
+    }
+    @Override
+    public DNode getHead() {
+        return head;
+    }
+
+    public void setHead(DNode head) {
+        this.head = head;
+    }
+
+    @Override
+    public DNode getTail() {
+        return tail;
+    }
+
+    public void setTail(DNode tail) {
+        this.tail = tail;
+    }
+
+    public int getTracker() {
+        return tracker;
+    }
+
+    public void setTracker(int tracker) {
+        this.tracker = tracker;
     }
 }
 
