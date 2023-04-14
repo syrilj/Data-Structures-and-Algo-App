@@ -10,12 +10,10 @@ import myLib.datastructures.nodes.DNode;
  */
 
 public class CSLL extends SLL{
-
     @Override
     public DNode getHead() {
         return head;
     }
-
     public void setHead(DNode head) {
         this.head = head;
     }
@@ -166,14 +164,11 @@ public class CSLL extends SLL{
     @Override
     public void SortedInsert(DNode node) {
         if (head == null|| size ==0 ) {
-            // If the list is empty, set the new node as both head and tail
             head = node;
             tail = node;
             node.setNext(node);
             size = 1;
         } else {
-            // If the list is not empty and the new node's data is greater than or equal to the head's data,
-            // insert the node in its proper position
             DNode present = head;
             DNode previous = tail;
             while(present != head && node.getData() > present.getData()){
@@ -195,16 +190,6 @@ public class CSLL extends SLL{
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
     /**
      * Searches for a node with the same data as the given node in the list.
      *
@@ -266,6 +251,10 @@ public class CSLL extends SLL{
      */
     @Override
     public void Delete(DNode node){
+        DNode nodeToDelete = this.Search(node);
+        if (nodeToDelete == null) {
+            return;
+        }
         if(head == null){
             return;
         }else{

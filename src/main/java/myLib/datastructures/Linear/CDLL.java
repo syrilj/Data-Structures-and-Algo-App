@@ -63,13 +63,6 @@ public class CDLL extends DLL{
         }
     }
 
-
-
-
-
-
-
-
     /**
      * Deletes the head node of the CDLL and updates the tail and tracker accordingly.
      */
@@ -77,14 +70,12 @@ public class CDLL extends DLL{
     @Override
     public void DeleteHead() {
         if (head != null) {
-            // If the head is the only node in the list, set both head and tail to null
             if (head == tail) {
                 head = null;
                 tail = null;
             } else {
                 head = head.getNext();
                 head.setPrevious(null);
-                // If the list is circular, update the tail's next reference to the new head
                 if (tail != null && tail.getNext() != head) {
                     tail.setNext(head);
                     head.setPrevious(tail);
@@ -127,6 +118,10 @@ public class CDLL extends DLL{
      */
 
     public void Delete(DNode node) {
+        DNode nodeToDelete = this.Search(node);
+        if (nodeToDelete == null) {
+            return;
+        }
         if (head == null) {
             return;
         } else if (head == tail) {
@@ -184,7 +179,7 @@ public class CDLL extends DLL{
         }else{
             tail.setNext(node);
             node.setPrevious(tail);
-            node.setNext(head);  // fix here
+            node.setNext(head);
             head.setPrevious(node);
             tail = node;
         }

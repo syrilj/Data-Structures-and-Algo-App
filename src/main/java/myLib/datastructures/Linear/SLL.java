@@ -171,7 +171,9 @@ public class SLL {
      * @param node
      */
     public void SortedInsert(DNode node) {
-        this.Sort();
+        if (!IsSorted()) {
+            this.Sort();
+        }
         if (this.head == null || node.getData() < this.head.getData()) {
             node.setNext(this.head);
             this.head = node;
@@ -218,8 +220,12 @@ public class SLL {
      * @return
      */
     public DNode Search(DNode node) {
+        if (this.head == null) {
+            return null;
+        }
+
         DNode current = this.head;
-        for (int i = 0; i < this.tracker; i++) {
+        for (int i = 0; i < this.tracker && current != null; i++) {
             if (node.getData() == current.getData()) {
                 return current;
             } else {
@@ -228,6 +234,7 @@ public class SLL {
         }
         return null;
     }
+
 
     /**
      * Delete head of the list
@@ -271,7 +278,15 @@ public class SLL {
      * @param node
      */
     public void Delete(DNode node) {
-        if (this.head.getData() == node.getData()) {
+        if (node == null) {
+            return;
+        }
+        //added this because will cause issues in the case node is not found otherwise
+        DNode nodeToDelete = this.Search(node);
+        if (nodeToDelete == null) {
+            return;
+        }
+        if (this.head.getData() == nodeToDelete.getData()) {
             this.head = this.head.getNext();
             this.tracker--;
             if (this.head == null) {
@@ -280,7 +295,7 @@ public class SLL {
             return;
         }
         DNode nodePrevious = this.head;
-        while (nodePrevious.getNext() != null && nodePrevious.getNext().getData() != node.getData()) {
+        while (nodePrevious.getNext() != null && nodePrevious.getNext().getData() != nodeToDelete.getData()) {
             nodePrevious = nodePrevious.getNext();
         }
         if (nodePrevious.getNext() != null) {
@@ -293,6 +308,7 @@ public class SLL {
     }
 
 
+
     /**
      * Applies insertion sort to the list
      * The insertion part will start from the head unlike the usual insertion sort algorithm
@@ -300,35 +316,37 @@ public class SLL {
      */
     public void Sort() {
         if (this.head == null || this.head.getNext() == null || this.IsSorted()) {
-            return;
+            return; // list is already sorted
         }
 
-        boolean swapped;
-        do {
-            swapped = false;
-            DNode current = this.head;
-            while (current.getNext() != null) {
-                if (current.getData() > current.getNext().getData()) {
-                    // swap current and current.next
-                    DNode tmp = current.getNext();
-                    current.setNext(tmp.getNext());
-                    tmp.setNext(current);
-                    if (current == this.head) {
-                        this.head = tmp;
-                    } else {
-                        DNode prev = this.head;
-                        while (prev.getNext() != current) {
-                            prev = prev.getNext();
-                        }
-                        prev.setNext(tmp);
-                    }
-                    swapped = true;
-                } else {
-                    current = current.getNext();
-                }
+        DNode current = this.head.getNext(); // start from the second node
+        while (current != null) {
+            DNode next = current.getNext(); // save the next node
+            DNode prev = this.head; // start from the head
+            while (prev != current && prev.getData() <= current.getData()) {
+                // traverse until we find the correct position to insert current
+                prev = prev.getNext();
             }
-        } while (swapped);
+            if (prev != current) {
+                // remove current from its current position
+                DNode tmp = current;
+                current = current.getNext();
+                tmp.setNext(null);
+
+                // insert current at the correct position
+                if (prev == this.head) {
+                    tmp.setNext(this.head);
+                    this.head = tmp;
+                } else {
+                    tmp.setNext(prev.getNext());
+                    prev.setNext(tmp);
+                }
+            } else {
+                current = next; // current is already in the correct position, move to the next node
+            }
+        }
     }
+
 
 
     /**

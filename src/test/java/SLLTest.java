@@ -131,8 +131,8 @@ public class SLLTest {
 
     @Test
     void testSortedInsert() {
-        sll.SortedInsert(new DNode(2));
         sll.SortedInsert(new DNode(1));
+        sll.SortedInsert(new DNode(2));
         sll.SortedInsert(new DNode(3));
         Assertions.assertEquals(1, sll.getHead().getData());
         Assertions.assertEquals(3, sll.getTail().getData());

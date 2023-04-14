@@ -144,13 +144,17 @@ public class App {
         list.DeleteTail();
 
         // Print the list
-        list.Print(); // List length: 3 Sorted: Yes List content: 1 -> 2 -> 3
+        list.Print();
+        System.out.println("Deleting Node with data 90 that isn't in it should do nothing just returns");
+        // Delete a specific node
+        list.Delete(new DNode(90));
 
+        System.out.println("Deleting Node with data 2 that is in it should see that it is no longer in the list");
         // Delete a specific node
         list.Delete(new DNode(2));
 
         // Print the list
-        list.Print(); // List length: 2 Sorted: Yes List content: 1 -> 3
+        list.Print();
 
         // Check if the list is sorted
         System.out.println("Is the list sorted? " + list.IsSorted()); // Is the list sorted? true
@@ -159,7 +163,7 @@ public class App {
         list.Sort();
 
         // Print the list
-        list.Print(); // List length: 2 Sorted: Yes List content: 1 -> 3
+        list.Print();
 
         // Clear the list
         list.Clear();
@@ -179,7 +183,7 @@ public class App {
         // create a new CDLL
         CDLL list = new CDLL();
 
-    // insert nodes into the list
+        // insert nodes into the list
         list.InsertTail(new DNode(10));
         list.InsertTail(new DNode(20));
         list.InsertTail(new DNode(30));
@@ -189,7 +193,7 @@ public class App {
 
         System.out.println("Inserting 10, 20, 30, 40, 15, and 5 into the list...");
 
-    // print out the list
+        // print out the list
         list.Print();
 
 // delete nodes from the list
@@ -547,13 +551,15 @@ public class App {
         list.Insert(node3, 1); // Insert at position 1
         list.Insert(node4, 0); // Insert at position 0
         list.Insert(node5, 4); // Insert at position 4
+        DNode node9 = new DNode(42);
+        list.SortedInsert(node9);
 
         // Print the list
         System.out.println("Initial list:");
         list.Print();
 
         // Search for a node in the list
-        DNode node6 = new DNode(15);
+        DNode node6 = new DNode(85);
         DNode foundNode = list.Search(node6);
         if (foundNode != null) {
             System.out.println("Node with data = " + node6.getData() + " found in list.");
@@ -596,7 +602,7 @@ public class App {
     private static void testBST() {
         System.out.println("Running functionality testing of BST");
         System.out.println("-------------------------------------------------");
-        
+
         // create a new BST object
         BST tree = new BST();
 
@@ -788,7 +794,6 @@ public class App {
     }
 
 }
-
 
 
 

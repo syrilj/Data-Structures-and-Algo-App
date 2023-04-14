@@ -203,6 +203,10 @@ public class DLL {
         if (head == null) {
             return;
         }
+        DNode nodeToDelete = this.Search(node);
+        if (nodeToDelete == null) {
+            return;
+        }
         if (head == node) {
             head = node.getNext();
             if (head != null) {
@@ -259,7 +263,7 @@ public class DLL {
 
     public void Sort() {
         if (head == null || head.getNext() == null) {
-            return; // list is empty or has only one element, nothing to sort
+            return;
         }
         DNode present = head;
         head = null;
