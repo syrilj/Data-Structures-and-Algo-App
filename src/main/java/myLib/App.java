@@ -715,10 +715,10 @@ public class App {
         System.out.println("New max element after increasing key: " + maxHeap.getMax());
 
 
-        maxHeap.increaseKey(1, 15);
+        maxHeap.increaseKey(1, 20);
         System.out.println("New max element after increasing key: " + maxHeap.getMax()); // Output: 15
 
-
+        maxHeap.print();
         System.out.println("\n-------------------------------------------------");
         System.out.println("Finished running functionality testing of MaxH\n");
     }
