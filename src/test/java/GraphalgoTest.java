@@ -1,4 +1,4 @@
-import myLib.datastructures.Graphalgo.*;
+import myLib.Graphalgo.Graphalgo;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

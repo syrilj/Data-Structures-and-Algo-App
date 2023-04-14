@@ -1,4 +1,4 @@
-package myLib.datastructures.Graphalgo;
+package myLib.Graphalgo;
 import myLib.datastructures.nodes.GraphNode;
 import java.util.ArrayList;
 import java.util.Arrays;

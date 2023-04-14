@@ -1,12 +1,13 @@
 package myLib;
 import java.util.Scanner;
+
+import myLib.Graphalgo.Graphalgo;
 import myLib.datastructures.Linear.StackLL;
 import myLib.datastructures.nodes.DNode;
 import myLib.datastructures.nodes.TNode;
 import myLib.datastructures.Linear.*;
 import myLib.datastructures.Linear.DLL;
 import myLib.datastructures.Trees.*;
-import myLib.datastructures.Graphalgo.*;
 import myLib.datastructures.Heap.*;
 
 public class App {
