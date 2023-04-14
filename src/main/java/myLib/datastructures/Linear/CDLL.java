@@ -2,8 +2,6 @@ package myLib.datastructures.Linear;
 
 import myLib.datastructures.nodes.DNode;
 
-import java.util.HashSet;
-
 /**
 
  This class represents a circular doubly linked list (CDLL) that extends a doubly linked list (DLL).
@@ -13,6 +11,30 @@ public class CDLL extends DLL{
     private DNode head;
     private DNode tail;
     private int tracker;
+
+    public DNode getHead() {
+        return head;
+    }
+
+    public void setHead(DNode head) {
+        this.head = head;
+    }
+
+
+    public DNode getTail() {
+        return tail;
+    }
+
+    public void setTail(DNode tail) {
+        this.tail = tail;
+    }
+    public int getTracker() {
+        return tracker;
+    }
+
+    public void setTracker(int tracker) {
+        this.tracker = tracker;
+    }
 
     /**
      * Constructs an empty CDLL with null head and tail sentinel nodes and a tracker of 0.
@@ -54,16 +76,26 @@ public class CDLL extends DLL{
 
     @Override
     public void DeleteHead() {
-        if (head == null) {
-            return;
-        } else if (head == tail) {
-            head = tail = null;
-        } else {
-            head.getNext().setPrevious(tail);
-            tail.setNext(head.getNext());
-            head = head.getNext();
+        if (head != null) {
+            // If the head is the only node in the list, set both head and tail to null
+            if (head == tail) {
+                head = null;
+                tail = null;
+            } else {
+                head = head.getNext();
+                head.setPrevious(null);
+                // If the list is circular, update the tail's next reference to the new head
+                if (tail != null && tail.getNext() != head) {
+                    tail.setNext(head);
+                    head.setPrevious(tail);
+                }
+            }
             tracker--;
         }
+    }
+
+    public boolean IsEmpty() {
+        return head == null;
     }
 
     /**
@@ -71,17 +103,23 @@ public class CDLL extends DLL{
      */
     @Override
     public void DeleteTail() {
-        if (tail == null) {
+        if (IsEmpty()) {
             return;
-        } else if (tail == head) {
-            tail = head = null;
+        }
+        if (tail.getPrevious() == null) {
+            head = null;
+            tail = null;
         } else {
-            tail.getPrevious().setNext(head);
-            head.setPrevious(tail.getPrevious());
             tail = tail.getPrevious();
-            tracker--;
+            tail.setNext(null);
+        }
+        tracker--;
+        if (tail != null && tail.getNext() != head) {
+            tail.setNext(head);
+            head.setPrevious(tail);
         }
     }
+
     /**
      * Deletes a specified node from the CDLL and updates the tracker accordingly.
      *
@@ -351,6 +389,5 @@ public class CDLL extends DLL{
         tracker = 0;
     }
 }
-
 
 

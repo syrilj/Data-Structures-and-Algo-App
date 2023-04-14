@@ -203,30 +203,35 @@ public class DLL {
         if (head == null) {
             return;
         }
-        if (head.getData() == node.getData()) {
-            head.getNext().setPrevious(null);
-            head = head.getNext();
-            count--;
-            if (head == null) {
+        if (head == node) {
+            head = node.getNext();
+            if (head != null) {
+                head.setPrevious(null);
+            } else {
                 tail = null;
             }
+            node.setNext(null);
+            count--;
             return;
         }
-        DNode present = head.getNext();
-        DNode previous = head;
-
-        while (present != null) {
-            if (present.getData() == node.getData()) {
-                previous.setNext(present.getNext());
-                present.getNext().setPrevious(previous);
+        if (tail == node) {
+            tail = node.getPrevious();
+            tail.setNext(null);
+            node.setPrevious(null);
+            count--;
+            return;
+        }
+        DNode current = head.getNext();
+        while (current != null) {
+            if (current == node) {
+                current.getPrevious().setNext(current.getNext());
+                current.getNext().setPrevious(current.getPrevious());
+                current.setPrevious(null);
+                current.setNext(null);
                 count--;
-                if (present == tail) {
-                    tail = previous;
-                }
                 return;
             }
-            previous = present;
-            present = present.getNext();
+            current = current.getNext();
         }
     }
 
