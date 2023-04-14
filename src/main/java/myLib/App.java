@@ -528,6 +528,42 @@ public class App {
         queue.Clear();
         queue.Print();
 
+        System.out.println("testing with node constructor");
+        DNode test = new DNode(5);
+        // Create a new queue
+        QueueLL queue2 = new QueueLL(test);
+
+        // Add some elements to the queue
+        queue2.Enqueue(new DNode(1));
+        queue2.Enqueue(new DNode(2));
+        queue2.Enqueue(new DNode(3));
+
+        // Print the contents of the queue
+        queue2.Print();
+
+        // Peek at the head of the queue
+        System.out.println("Peeking: " + queue2.Peek().getData());
+        System.out.println("Dequeue an element from the queue");
+        queue2.Dequeue();
+
+        // Print the contents of the queue again
+        queue2.Print();
+
+        // Search for an element in the queue
+        DNode nodeToSearch3 = new DNode(2);
+        int position = queue.Seek(nodeToSearch3);
+        if (position == -1) {
+            System.out.println("Element not found in queue");
+        } else {
+            System.out.println("Element found at position " + position);
+        }
+
+        // Clear the queue
+        queue2.Clear();
+
+        // Print the contents of the queue one last time
+        queue2.Print();
+
         System.out.println("-------------------------------------------------");
         System.out.println("Finished running functionality testing of QueueLL");
     }

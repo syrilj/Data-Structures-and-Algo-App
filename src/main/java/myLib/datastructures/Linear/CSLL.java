@@ -26,6 +26,9 @@ public class CSLL extends SLL{
     public void setTail(DNode tail) {
         this.tail = tail;
     }
+    public int getSize(){
+        return this.size;
+    }
 
     public void setSize(int size) {
         this.size = size;
@@ -326,9 +329,5 @@ public class CSLL extends SLL{
         head = null;
         tail = null;
         size = 0;
-    }
-
-    public int getSize(){
-        return this.size;
     }
 }

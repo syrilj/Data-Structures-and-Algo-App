@@ -11,7 +11,7 @@ public class CDLL extends DLL{
     private DNode head;
     private DNode tail;
     private int tracker;
-
+    @Override
     public DNode getHead() {
         return head;
     }
@@ -20,7 +20,7 @@ public class CDLL extends DLL{
         this.head = head;
     }
 
-
+    @Override
     public DNode getTail() {
         return tail;
     }
@@ -28,6 +28,7 @@ public class CDLL extends DLL{
     public void setTail(DNode tail) {
         this.tail = tail;
     }
+
     public int getTracker() {
         return tracker;
     }
