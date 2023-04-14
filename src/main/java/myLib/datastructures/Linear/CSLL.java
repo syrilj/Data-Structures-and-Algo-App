@@ -19,9 +19,7 @@ public class CSLL extends SLL{
      * Constructs an empty CSLL.
      */
     public CSLL(){
-        head = null;
-        size = 0;
-        tail = null;
+       super();
     }
 
     /**
@@ -31,44 +29,35 @@ public class CSLL extends SLL{
      */
     public CSLL(DNode head){
         this.head = head;
-        tail = null;
-        size = 1;
-        DNode current = head;
-        if(current.getNext() != null) {
-            while (current.getNext().getData() != head.getData()) {
-                current = current.getNext();
-                size++;
-            }
-        }
-        current.setNext(this.head);
-        tail = current;
+        this.tail = head;
+        this.tracker = 1;
     }
+
 
     /**
      * Sorts the CSLL in ascending order.
      * Overrides the Sort() method of SLL.
      */
+    /**
+     * Sorts the CSLL in ascending order.
+     * Overrides the Sort() method of SLL.
+     */
     @Override
-    public void Sort(){
-        if(head == null || head == tail){
-            return;
-        }else{
-            boolean swapped = true;
-            while(swapped){
-                swapped = false;
-                DNode current = head;
-                while(current.getNext() != head){
-                    if(current.getData() > current.getNext().getData()){
-                        int temp = current.getData();
-                        current.setData(current.getNext().getData());
-                        current.getNext().setData(temp);
-                        swapped = true;
-                    }
-                    current = current.getNext();
-                }
-            }
+    public void Sort() {
+        if (this.head == null || this.head.getNext() == this.head) {
+            return; // nothing to sort
         }
+
+        // perform the sorting algorithm
+        super.Sort();
+
+        // reset the tail's next to the head to create a circular list
+        this.tail.setNext(this.head);
     }
+
+
+
+
     /**
      * Inserts a node at the head of the CSLL.
      * Overrides the InsertHead() method of SLL.
@@ -76,17 +65,12 @@ public class CSLL extends SLL{
      * @param node the node to insert at the head of the CSLL
      */
     @Override
-    public void InsertHead(DNode node){
-        if(head == null){
-            head = node;
-            tail = node;
-            head.setNext(head);
-        }else{
-            node.setNext(head);
-            tail.setNext(node);
-            head = node;
+    public void InsertHead(DNode node) {
+        if (super.getHead() != null) {
+            super.getTail().setNext(null);
         }
-        size++;
+        super.InsertHead(node);
+        super.getTail().setNext(super.getHead());
     }
     /**
      * Inserts a node at the tail of the CSLL.
@@ -96,16 +80,11 @@ public class CSLL extends SLL{
      */
     @Override
     public void InsertTail(DNode node){
-        if(head == null){
-            head = node;
-            tail = node;
-            head.setNext(head);
-        }else{
-            tail.setNext(node);
-            node.setNext(head);
-            tail = node;
+        if (super.getHead() != null) {
+            super.getTail().setNext(null);
         }
-        size++;
+        super.InsertTail(node);
+        super.getTail().setNext(super.getHead());
     }
     /**
      * Inserts a node at a given position in the CSLL.
@@ -117,22 +96,11 @@ public class CSLL extends SLL{
      */
     @Override
     public void Insert(DNode node, int position){
-        if(position < 1 || position > size + 1){
-            throw new IndexOutOfBoundsException();
+        if(super.getHead() != null) {
+            super.getTail().setNext(null);
         }
-        if(position == 1){
-            InsertHead(node);
-        }else if(position == size + 1){
-            InsertTail(node);
-        }else{
-            DNode current = head;
-            for(int i = 1; i < position - 1; i++){
-                current = current.getNext();
-            }
-            node.setNext(current.getNext());
-            current.setNext(node);
-            size++;
-        }
+        super.Insert(node, position);
+        super.getTail().setNext(super.getHead());
     }
 
     /**
@@ -142,27 +110,23 @@ public class CSLL extends SLL{
      * @param node the node to be inserted into the list
      */
     @Override
-    public void SortedInsert(DNode node){
-        if(head == null){
-            head = node;
-            tail = node;
-            head.setNext(head);
-        }else{
-            if(!isSorted()){
-                Sort();
-            }
-            DNode current = head;
-            while(current.getNext() != head && current.getNext().getData() < node.getData()){
-                current = current.getNext();
-            }
-            node.setNext(current.getNext());
-            current.setNext(node);
-            if(current == tail){
-                tail = node;
-            }
+    public void SortedInsert(DNode node) {
+        if(super.getHead() != null) {
+            super.getTail().setNext(null);
         }
-        size++;
+        super.SortedInsert(node);
+        super.getTail().setNext(super.getHead());
     }
+
+
+
+
+
+
+
+
+
+
     /**
      * Searches for a node with the same data as the given node in the list.
      *
@@ -171,93 +135,111 @@ public class CSLL extends SLL{
      */
     @Override
     public DNode Search(DNode node){
-        if(head == null){
-            return null;
-        }else{
-            DNode current = head;
-            while(current.getNext() != head && current.getData() != node.getData()){
-                current = current.getNext();
-            }
-            if(current.getData() == node.getData()){
-                return current;
-            }else{
-                return null;
-            }
+        return super.Search(node);
+    }
+
+    /**
+     * Delete head of the circular list
+     */
+    @Override
+    public void DeleteHead() {
+        if (this.head == null) {
+            return;
+        }
+        if (this.head.getNext() == null) {
+            this.head = null;
+            this.tail = null;
+            this.tracker = 0;
+            return;
+        } else {
+            this.head = this.head.getNext();
+            this.head.setPrevious(this.tail);
+            this.tail.setNext(this.head);
+            this.tracker--;
         }
     }
 
     /**
-     * Deletes the head node of the list.
+     * Deletes the tail of the circular list
      */
     @Override
-    public void DeleteHead(){
-        if(head == null){
+    public void DeleteTail() {
+        if (this.head == null) {
             return;
-        }else{
-            head = head.getNext();
-            tail.setNext(head);
-            size--;
         }
-    }
-    /**
-     * Deletes the tail node of the list.
-     */
-    @Override
-    public void DeleteTail(){
-        if(head == null){
+        if (this.head.getNext() == this.head) {
+            this.head = null;
+            this.tracker = 0;
+            this.tail = null; // Update the tail pointer to null
             return;
-        }else{
-            DNode current = head;
-            while(current.getNext() != tail){
-                current = current.getNext();
-            }
-            current.setNext(head);
-            tail = current;
-            size--;
         }
+        DNode intr = this.head;
+        while (intr.getNext() != this.tail) {
+            intr = intr.getNext();
+        }
+        intr.setNext(this.head);
+        this.tail = intr;
+        this.tracker--;
     }
 
     /**
-     * Deletes the node with the same data as the given node from the list.
-     *
-     * @param node the node to be deleted from the list
+     * Delete a node from the circular list
+     * @param node
      */
     @Override
-    public void Delete(DNode node){
-        if(head == null){
+    public void Delete(DNode node) {
+        if (this.head == null) {
             return;
-        }else{
-            DNode current = head;
-            while(current.getNext() != head && current.getNext().getData() != node.getData()){
-                current = current.getNext();
+        }
+        if (this.head.getData() == node.getData()) {
+            this.head = this.head.getNext();
+            this.tail.setNext(this.head);
+            this.tracker--;
+            if (this.head == null) {
+                this.tail = null;
             }
-            if(current.getNext().getData() == node.getData()){
-                current.setNext(current.getNext().getNext());
-                size--;
+            return;
+        }
+        DNode nodePrevious = this.head;
+        while (nodePrevious.getNext() != this.head && nodePrevious.getNext().getData() != node.getData()) {
+            nodePrevious = nodePrevious.getNext();
+        }
+        if (nodePrevious.getNext() != this.head) {
+            nodePrevious.setNext(nodePrevious.getNext().getNext());
+            this.tracker--;
+            if (nodePrevious.getNext() == this.head) {
+                this.tail = nodePrevious;
             }
         }
+        if (nodePrevious.getNext() == this.head && nodePrevious == this.tail) { // If the node to be deleted is the tail node
+            this.tail = nodePrevious.getPrevious();
+            this.tail.setNext(this.head);
+            this.tracker--;
+        }
     }
+
+
     /**
-     * Checks if the list is sorted in ascending order.
+     * Checks if the CSLL is sorted in ascending order.
      *
-     * @return true if the list is sorted, false otherwise
+     * @return true if the CSLL is sorted in ascending order, false otherwise
      */
     @Override
-    public boolean isSorted(){
-        if(head == null){
+    public boolean isSorted() {
+        if (head == null) {
             return true;
-        }else{
-            DNode current = head;
-            while(current.getNext() != head && current.getData() <= current.getNext().getData()){
-                current = current.getNext();
-            }
-            if(current.getNext() == head){
-                return true;
-            }else{
+        }
+        DNode current = head;
+        while (current.getNext() != head) {
+            if (current.getData() > current.getNext().getData()) {
                 return false;
             }
+            current = current.getNext();
         }
+        return true;
     }
+
+
     /**
      * Prints the length, sorted status, and content of the list.
      */
@@ -279,13 +261,14 @@ public class CSLL extends SLL{
             DNode current = head;
             System.out.print(current.getData());
             current = current.getNext();
-            while (current.getData() != head.getData()) {
+            while (current != null && current != head) {
                 System.out.print(" -> " + current.getData());
                 current = current.getNext();
             }
             System.out.println();
         }
     }
+
     /**
      * Clears the list by setting the head, tail, and size to null or 0.
      */
@@ -294,5 +277,9 @@ public class CSLL extends SLL{
         head = null;
         tail = null;
         size = 0;
+    }
+
+    public int getSize(){
+        return this.size;
     }
 }

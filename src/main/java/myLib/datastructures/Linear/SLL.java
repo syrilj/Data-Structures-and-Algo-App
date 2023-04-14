@@ -29,6 +29,16 @@ public class SLL {
         this.tail = null;
         this.tracker = 0;
     }
+
+    /**
+     * Overload constructor with a Node object argument to use as head
+     * @param node
+     */
+    public SLL(DNode node) {
+        this.head = node;
+        this.tail = node;
+        this.tracker = 1;
+    }
     /**
      Checks if the list is empty.
      @return true if the list is empty, false otherwise
@@ -88,18 +98,6 @@ public class SLL {
             }
         }
     }
-
-
-    /**
-     * constructor
-     * @param node
-     */
-    public SLL(DNode node) {
-        this.head = node;
-        this.tail = node;
-        this.tracker = 1;
-    }
-
     /**
      * InsertHead for the list
      * @param node
@@ -157,14 +155,14 @@ public class SLL {
             this.tracker++;
             return;
         }
-        DNode currentNode = this.head;
+        DNode nodeCurrent = this.head;
         int i = 0;
         while (i < position - 1) {
-            currentNode = currentNode.getNext();
+            nodeCurrent = nodeCurrent.getNext();
             i++;
         }
-        node.setNext(currentNode.getNext());
-        currentNode.setNext(node);
+        node.setNext(nodeCurrent.getNext());
+        nodeCurrent.setNext(node);
         this.tracker++;
     }
 
@@ -213,7 +211,9 @@ public class SLL {
     }
 
     /**
-     * searches the list
+     * Looks up node in the list
+     * ▪ If found it returns the object
+     * ▪ Otherwise returns null
      * @param node
      * @return
      */
@@ -283,22 +283,24 @@ public class SLL {
             }
             return;
         }
-        DNode prevNode = this.head;
-        while (prevNode.getNext() != null && prevNode.getNext().getData() != node.getData()) {
-            prevNode = prevNode.getNext();
+        DNode nodePrevious = this.head;
+        while (nodePrevious.getNext() != null && nodePrevious.getNext().getData() != node.getData()) {
+            nodePrevious = nodePrevious.getNext();
         }
-        if (prevNode.getNext() != null) {
-            prevNode.setNext(prevNode.getNext().getNext());
+        if (nodePrevious.getNext() != null) {
+            nodePrevious.setNext(nodePrevious.getNext().getNext());
             this.tracker--;
-            if (prevNode.getNext() == null) {
-                this.tail = prevNode;
+            if (nodePrevious.getNext() == null) {
+                this.tail = nodePrevious;
             }
         }
     }
 
 
     /**
-     * sort helpful for other methods as well
+     * Applies insertion sort to the list
+     * The insertion part will start from the head unlike the usual insertion sort algorithm
+     * Instead of tracking back the list
      */
     public void Sort() {
         if (this.head == null || this.head.getNext() == null || this.isSorted()) {
@@ -343,7 +345,11 @@ public class SLL {
     }
 
     /**
-     * prints the data in a clear understandable format
+     * Prints the list information on the screen, this includes
+     * ▪ List length
+     * ▪ Sorted status
+     * ▪ List content
+     * This does it in a clear readable format
      */
     public void Print() {
         System.out.println("List length: " + this.getLength());

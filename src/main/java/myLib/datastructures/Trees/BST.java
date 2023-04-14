@@ -34,7 +34,7 @@ public class BST {
     }
 
     // Insert a node with the given value
-    public void insert(int val) {
+    public void Insert(int val) {
         TNode newNode = new TNode(val, 0, null, null, null);
         if (root == null) {
             root = newNode;
@@ -63,7 +63,7 @@ public class BST {
     }
 
     // Insert a node into the tree
-    public void insert(TNode node) {
+    public void Insert(TNode node) {
         if (root == null) {
             root = node;
         } else {
@@ -91,7 +91,7 @@ public class BST {
     }
 
     // Delete a node with the given value
-public void delete(int val) {
+public void Delete(int val) {
     TNode current = root;
     while (current != null) {
         if (current.getData() == val) {
@@ -170,7 +170,7 @@ private TNode getSuccessor(TNode node) {
 }
 
 // Search for a node with the given value
-public TNode search(int val) {
+public TNode Search(int val) {
     TNode current = root;
     while (current != null) {
         if (current.getData() == val) {
@@ -221,7 +221,7 @@ private void printInOrderHelper(TNode node) {
         }
     }
 
-    public void delete(TNode node) {
+    public void Delete(TNode node) {
     // Find the node to be deleted
     TNode current = root;
     TNode parent = null;

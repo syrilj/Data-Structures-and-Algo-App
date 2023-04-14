@@ -1,4 +1,4 @@
-package myLib.datastructures;
+package myLib;
 import java.util.Scanner;
 import myLib.datastructures.Linear.StackLL;
 import myLib.datastructures.nodes.DNode;
@@ -6,13 +6,15 @@ import myLib.datastructures.nodes.TNode;
 import myLib.datastructures.Linear.*;
 import myLib.datastructures.Linear.DLL;
 import myLib.datastructures.Trees.*;
+import myLib.datastructures.Graphalgo.*;
+import myLib.datastructures.Heap.*;
 
-public class Main {
+public class App {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
         int choice = 0;
-        while (choice != 10) {
+        while (choice != 11) {
             System.out.println("Select an option:");
             System.out.println("1. Run all tests");
             System.out.println("2. Test Singly Linked List (SLL)");
@@ -23,7 +25,10 @@ public class Main {
             System.out.println("7. Test Circular Singly Linked List (CSLL)");
             System.out.println("8. Test Binary Search Tree (BST)");
             System.out.println("9. Test AVL Tree (AVL)");
-            System.out.println("10. Exit");
+            System.out.println("10. Test Max ra (MaxH)");
+            System.out.println("11. Test Min Heap (MinH)");
+            System.out.println("12. Test Graph Structures");
+            System.out.println("13. Exit");
             System.out.print("Enter your choice: ");
             choice = input.nextInt();
 
@@ -65,7 +70,20 @@ public class Main {
                     testAVL();
                     break;
                 case 10:
+                    System.out.println("Testing Max Heap (MaxH)");
+                    testMaxH();
+                    break;
+                case 11:
+                    System.out.println("Testing Min Heap (MinH)");
+                    testMinH();
+                    break;
+                case 12:
+                    System.out.println("Testing Graph Structures");
+                    testGraph();
+                    break;
+                case 13:
                     System.out.println("Exiting...");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid choice.");
@@ -84,12 +102,18 @@ public class Main {
         testCSLL();
         testBST();
         testAVL();
+        testMaxH();
+        testMinH();
+        testGraph();
     }
 
     private static void testCSLL() {
         System.out.println("-------------------------------------------------");
         System.out.println("Running functionality testing of CSLL");
-        CSLL list = new CSLL();
+        // Create a new instance of the CSLL class with a head node
+        DNode head = new DNode(4);
+        CSLL list = new CSLL(head);
+
 
         // Insert nodes at the head and tail of the list
         list.InsertHead(new DNode(1));
@@ -97,13 +121,13 @@ public class Main {
         list.InsertTail(new DNode(3));
 
         // Print the list
-        list.Print(); // List length: 3 Sorted: Yes List content: 1 -> 2 -> 3
+        list.Print(); // List length: 3 Sorted: Yes List content: 1 -> 4-> 2 -> 3
 
         // Insert a node at a specific position
         list.Insert(new DNode(4), 2);
 
         // Print the list
-        list.Print(); // List length: 4 Sorted: Yes List content: 1 -> 4 -> 2 -> 3
+        list.Print(); // List length: 4 Sorted: Yes List content: 1 -> 4 -> 4 -> 2 -> 3
 
         // Insert a node in sorted order
         list.SortedInsert(new DNode(0));
@@ -142,6 +166,7 @@ public class Main {
 
         // Print the list
         list.Print(); // List length: 0 Sorted: Yes List content: empty
+
         System.out.println("-------------------------------------------------");
         System.out.println("Finished Running functionality testing of CSLL");
     }
@@ -151,32 +176,33 @@ public class Main {
     private static void testCDLL() {
         System.out.println("-------------------------------------------------");
         System.out.println("Running functionality testing of CDLL");
+        // create a new CDLL
         CDLL list = new CDLL();
 
-        // insert nodes into list
+    // insert nodes into the list
         list.InsertTail(new DNode(10));
         list.InsertTail(new DNode(20));
         list.InsertTail(new DNode(30));
         list.InsertTail(new DNode(40));
-        list.InsertHead(new DNode(5));
         list.Insert(new DNode(15), 3);
+        list.SortedInsert(new DNode(5));
 
-        System.out.println("Inserting 5, 10, 15, 20, 30, and 40 into the list...");
+        System.out.println("Inserting 10, 20, 30, 40, 15, and 5 into the list...");
 
-        // print out the list
+    // print out the list
         list.Print();
 
-        // delete nodes from list
+// delete nodes from the list
         list.DeleteHead();
         list.DeleteTail();
         list.Delete(new DNode(15));
 
         System.out.println("Deleting the head, tail, and node with value 15 from the list...");
 
-        // print out the updated list
+// print out the updated list
         list.Print();
 
-        // search for a node in the list
+// search for a node in the list
         DNode searchNode = new DNode(20);
         DNode foundNode = list.Search(searchNode);
 
@@ -186,13 +212,61 @@ public class Main {
             System.out.println("Did not find node with value " + searchNode.getData() + " in the list.");
         }
 
-        // sort the list
+// sort the list
         list.Sort();
 
         System.out.println("Sorting the list...");
 
-        // print out the sorted list
+// print out the sorted list
         list.Print();
+
+// create a new CDLL with a head node
+        DNode headNode = new DNode(10);
+        CDLL myList = new CDLL(headNode);
+
+// insert nodes into the list
+        myList.InsertTail(new DNode(20));
+        myList.InsertTail(new DNode(30));
+        myList.Insert(new DNode(15), 2);
+        myList.SortedInsert(new DNode(5));
+
+        System.out.println("Inserting 20, 30, 15, and 5 into the list...");
+
+// print out the list
+        myList.Print();
+
+// delete nodes from the list
+        myList.DeleteHead();
+        myList.DeleteTail();
+        myList.Delete(new DNode(15));
+
+        System.out.println("Deleting the head, tail, and node with value 15 from the list...");
+
+// print out the updated list
+        myList.Print();
+
+// search for a node in the list
+        DNode searchNode2 = new DNode(20);
+        DNode foundNode2 = myList.Search(searchNode2);
+
+        if (foundNode2 != null) {
+            System.out.println("Found node with value " + searchNode2.getData() + " in the list.");
+        } else {
+            System.out.println("Did not find node with value " + searchNode2.getData() + " in the list.");
+        }
+
+        System.out.println("Sorting the list...");
+
+// sort the list
+        myList.Sort();
+
+// print out the sorted list
+        myList.Print();
+
+
+        myList.Clear();
+        System.out.println("Clearing the list... Should say List Content Empty");
+        myList.Print();
         System.out.println("-------------------------------------------------");
         System.out.println("Running functionality testing of CDLL");
 
@@ -202,6 +276,60 @@ public class Main {
 
         System.out.println("-------------------------------------------------");
         System.out.println("Running functionality testing of DLL");
+
+        // Create a new DLL
+        DNode head = new DNode(0);
+        DLL dll1 = new DLL(head);
+        System.out.println("New DLL using overloaded constructor  created.");
+
+        // Insert nodes at head
+        dll1.InsertHead(new DNode(9));
+        System.out.println("Inserted node with data = 9 at the head.");
+        dll1.InsertHead(new DNode(4));
+        System.out.println("Inserted node with data = 4 at the head.");
+        dll1.InsertHead(new DNode(18));
+        System.out.println("Inserted node with data = 18 at the head.");
+
+        // Insert nodes at tail
+        dll1.InsertTail(new DNode(41));
+        System.out.println("Inserted node with data = 41 at the tail.");
+        dll1.InsertTail(new DNode(51));
+        System.out.println("Inserted node with data = 51 at the tail.");
+        dll1.InsertTail(new DNode(61));
+        System.out.println("Inserted node with data = 61 at the tail.");
+
+        // Insert a node at a specific position
+        int position1 = 6;
+        dll1.Insert(new DNode(9), position1);
+        System.out.println("Inserted node with data = 9 at position " + position1 + ".");
+        dll1.Print();
+
+        // Search for a node
+        DNode node = dll1.Search(new DNode(41));
+        if (node != null) {
+            System.out.println("Search result: Node with data = " + node.getData() + " found.");
+        } else {
+            System.out.println("Search result: Node with data = 41 not found.");
+        }
+
+        // Delete a node
+        DNode nodeToDelete = new DNode(9);
+        dll1.Delete(nodeToDelete);
+        System.out.println("Deleted node with data = " + nodeToDelete.getData() + ".");
+
+        // Sort the list
+        dll1.Sort();
+        System.out.println("List sorted in ascending order.");
+
+        // Print the list
+        System.out.print("DLL content: ");
+        dll1.Print();
+
+        // Clear the list
+        dll1.Clear();
+        System.out.println("List cleared.");
+
+
 
 // Create a new DLL
         DLL dll = new DLL();
@@ -230,16 +358,16 @@ public class Main {
         dll.Print();
 
 // Search for a node
-        DNode node = dll.Search(new DNode(7));
-        if (node != null) {
-            System.out.println("Search result: Node with data = " + node.getData() + " found.");
+        DNode node2 = dll.Search(new DNode(7));
+        if (node2 != null) {
+            System.out.println("Search result: Node with data = " + node2.getData() + " found.");
         } else {
             System.out.println("Search result: Node with data = 7 not found.");
         }
 
 // Delete a node
-        DNode nodeToDelete = new DNode(2);
-        dll.Delete(nodeToDelete);
+        DNode nodeToDelete2 = new DNode(2);
+        dll.Delete(nodeToDelete2);
         System.out.println("Deleted node with data = " + nodeToDelete.getData() + ".");
 
 // Sort the list
@@ -255,7 +383,6 @@ public class Main {
         System.out.println("List cleared.");
         System.out.println("-------------------------------------------------");
         System.out.println("Finished running functionality testing of DLL.");
-
     }
 
     private static void testStackLL() {
@@ -360,7 +487,7 @@ public class Main {
         DNode nodeToSearch = new DNode(30);
         System.out.println("Searching for node " + nodeToSearch.getData() + "...");
         if (queue.Search(nodeToSearch) != null) {
-            System.out.println( "Node found in the queue.");
+            System.out.println("Node found in the queue.");
         } else {
             System.out.println("Node not found in the queue.");
         }
@@ -369,7 +496,7 @@ public class Main {
         DNode nodeToSearch2 = new DNode(50);
         System.out.println("Searching for node " + nodeToSearch2.getData() + "...");
         if (queue.Search(nodeToSearch2) != null) {
-            System.out.println( "Node found in the queue.");
+            System.out.println("Node found in the queue.");
         } else {
             System.out.println("Node not found in the queue.");
         }
@@ -474,24 +601,31 @@ public class Main {
         BST tree = new BST();
 
         // insert some nodes into the tree
-        tree.insert(50);
-        tree.insert(30);
-        tree.insert(20);
-        tree.insert(40);
-        tree.insert(70);
-        tree.insert(60);
-        tree.insert(80);
+        tree.Insert(50);
+        tree.Insert(30);
+        tree.Insert(20);
+        tree.Insert(40);
+        tree.Insert(70);
+        tree.Insert(60);
+        tree.Insert(80);
 
-        // test the search function
-        TNode node = tree.search(40);
+        //Printing in order
+        System.out.println("Printing in order:");
+        tree.printInOrder();
+        //Printintg in breadth first form
+        System.out.println("\nPrinting in Breadth First Order:");
+        tree.printBF();
+
+        // testing the search function
+        TNode node = tree.Search(40);
         if (node != null) {
-            System.out.println("Search for 40: \n" + node.data + " was found in the tree");
+            System.out.println("Searching for 40... \n" + node.data + " was found in the tree");
         } else {
             System.out.println("Value not found in tree");
         }
 
         // test the delete function
-        tree.delete(20);
+        tree.Delete(20);
         System.out.println("Ordered Traversal after deletion: ");
         tree.printInOrder();
 
@@ -499,50 +633,160 @@ public class Main {
         System.out.println("Finished running functionality testing of BST");
     }
     private static void testAVL() {
-        System.out.println("Running functionality testing of AVL tree");
+        System.out.println("Running functionality testing of AVL");
         System.out.println("-------------------------------------------------");
+        // create a new BST object
+        AVL tree = new AVL(20);
 
-// Create a new AVL object
-        AVL tree = new AVL();
+        // insert some nodes into the tree
+        tree.Insert(50);
+        tree.Insert(30);
+        tree.Insert(40);
+        tree.Insert(70);
+        tree.Insert(60);
+        tree.Insert(80);
 
-// Insert some nodes into the tree
-        tree.insert(50);
-        System.out.println("Inserted 50");
-        tree.insert(25);
-        System.out.println("Inserted 25");
-        tree.insert(75);
-        System.out.println("Inserted 75");
-        tree.insert(10);
-        System.out.println("Inserted 10");
-        tree.insert(30);
-        System.out.println("Inserted 30");
-        tree.insert(60);
-        System.out.println("Inserted 85");
-        System.out.println("Inorder traversal of the tree: ");
+        System.out.println("Printing in order:");
+        tree.printInOrder();
+        System.out.println("\nPrinting in Breadth First Order:");
+        tree.printBF();
+
+        // create an unbalanced tree
+        TNode unbalancedTree = new TNode(50);
+        unbalancedTree.setLeft(new TNode(30));
+        unbalancedTree.getLeft().setLeft(new TNode(20));
+        unbalancedTree.getLeft().setRight(new TNode(40));
+        unbalancedTree.setRight(new TNode(70));
+        unbalancedTree.getRight().setLeft(new TNode(60));
+        unbalancedTree.getRight().setRight(new TNode(80));
+
+        // create a new AVL tree from the unbalanced tree
+        AVL balancedTree = new AVL(unbalancedTree);
+
+
+        System.out.println("\nPrinting in order (balanced tree):");
+        balancedTree.printInOrder();
+        System.out.println("\nPrinting in Breadth First Order (balanced tree):");
+        balancedTree.printBF();
+
+        System.out.println("Deleting from the tree...");
+        tree.Delete(30);
+        System.out.println("Printing after deleting from the tree:");
         tree.printInOrder();
 
-// Delete some nodes from the tree
-        System.out.println("\nDeleting 30");
-        tree.delete(30);
-        System.out.println("Deleting 85");
-        tree.delete(85);
-
-// Set the root node to the node containing the value 60
         // test the search function
-        TNode node = tree.search(40);
+        TNode node = tree.Search(40);
         if (node != null) {
-            System.out.println("Search for 40: \n" + node.data + " was found in the tree");
+            System.out.println("\nSearch for 40: \n" + node.data + " was found in the tree");
         } else {
             System.out.println("Value not found in tree");
         }
 
-// Test the inorder traversal function
-        System.out.println("Inorder traversal of the tree: ");
-        tree.printInOrder();
-
         System.out.println("\n-------------------------------------------------");
         System.out.println("Finished running functionality testing of AVL");
     }
+    private static void testMaxH(){
+        System.out.println("Running functionality testing of MaxH");
+        System.out.println("-------------------------------------------------");
+        MaxH maxHeap = new MaxH();
+
+        // Insert elements
+        maxHeap.insert(15);
+        maxHeap.insert(10);
+        maxHeap.insert(14);
+        maxHeap.insert(7);
+        maxHeap.insert(5);
+        maxHeap.insert(12);
+        maxHeap.insert(1);
+
+        // Print the heap
+        maxHeap.print();
+
+        // Test getMax()
+        System.out.println("Max element: " + maxHeap.getMax());
+
+        // Test extractMax()
+        int max = maxHeap.extractMax();
+        System.out.println("Extracted max element: " + max);
+        System.out.println("New max element: " + maxHeap.getMax());
+
+
+        maxHeap.increaseKey(1, 15);
+        System.out.println("New max element after increasing key: " + maxHeap.getMax());
+
+
+        maxHeap.increaseKey(1, 15);
+        System.out.println("New max element after increasing key: " + maxHeap.getMax()); // Output: 15
+
+
+        System.out.println("\n-------------------------------------------------");
+        System.out.println("Finished running functionality testing of MaxH\n");
+    }
+    private static void testMinH(){
+        System.out.println("Running functionality testing of MinH");
+        System.out.println("-------------------------------------------------");
+
+        MinH minHeap = new MinH();
+
+        // Insert elements
+        minHeap.insert(15);
+        minHeap.insert(10);
+        minHeap.insert(14);
+        minHeap.insert(7);
+        minHeap.insert(12);
+        minHeap.print();
+        System.out.println("Min element: " + minHeap.getMin());
+
+
+        int min = minHeap.extractMin();
+        System.out.println("Extracted min element: " + min);
+        System.out.println("New min element: " + minHeap.getMin());
+        try {
+            minHeap.decreaseKey(0, 5);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("New min element after decreasing key: " + minHeap.getMin());
+        minHeap.print();
+        System.out.println("-------------------------------------------------");
+        System.out.println("Finished running functionality testing of MinH\n");
+    }
+
+
+    private static void testGraph(){
+        System.out.println("Running functionality testing of Graph");
+        System.out.println("-------------------------------------------------");
+
+        // create a graph with 5 vertices and 6 edges
+        Graphalgo graph = new Graphalgo();
+        for (int i = 0; i < 5; i++) {
+            graph.addVertex(i);
+        }
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+        graph.addEdge(1, 2);
+        graph.addEdge(2, 0);
+        graph.addEdge(2, 3);
+        graph.addEdge(3, 3);
+
+        // test dfs method
+        System.out.println("DFS traversal of the graph:");
+        graph.dfs();
+        System.out.println();
+
+        // test bfs method
+        System.out.println("BFS traversal of the graph:");
+        graph.bfs();
+        System.out.println();
+
+        // test dijkstra method
+        System.out.println("Dijkstra's algorithm from vertex 0:");
+        graph.dijkstra(0);
+
+        System.out.println("\n-------------------------------------------------");
+        System.out.println("Finished running functionality testing of Graph\n");
+    }
+
 }
 
 
