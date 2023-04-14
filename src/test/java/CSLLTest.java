@@ -256,4 +256,134 @@ public class CSLLTest {
         assertEquals(node2, list.getTail());
         assertEquals(4, list.getSize());
     }
+
+
+    @Test
+    public void testEmptyListMore() {
+        CSLL list = new CSLL();
+        assertEquals(null, list.getHead());
+        assertEquals(null, list.getTail());
+        assertEquals(0, list.getSize());
+    }
+
+    @Test
+    public void testInsertHeadMore() {
+        CSLL list = new CSLL();
+        DNode node1 = new DNode(1);
+        DNode node2 = new DNode(2);
+        list.InsertHead(node1);
+        list.InsertHead(node2);
+        assertEquals(node2, list.getHead());
+        assertEquals(node1, list.getTail());
+        assertEquals(2, list.getSize());
+    }
+
+    @Test
+    public void testInsertTailMore() {
+        CSLL list = new CSLL();
+        DNode node1 = new DNode(1);
+        DNode node2 = new DNode(2);
+        list.InsertTail(node1);
+        list.InsertTail(node2);
+        assertEquals(node1, list.getHead());
+        assertEquals(node2, list.getTail());
+        assertEquals(2, list.getSize());
+    }
+    @Test
+    public void testSortedInsertMore() {
+        CSLL list = new CSLL();
+        DNode node1 = new DNode(1);
+        DNode node2 = new DNode(2);
+        DNode node3 = new DNode(3);
+        list.SortedInsert(node2);
+        list.SortedInsert(node1);
+        list.SortedInsert(node3);
+        assertEquals(node1, list.getHead());
+        assertEquals(node3, list.getTail());
+        assertEquals(node2, list.getHead().getNext());
+        assertEquals(3, list.getSize());
+    }
+
+    @Test
+    public void testSearch() {
+        CSLL list = new CSLL();
+        DNode node1 = new DNode(1);
+        DNode node2 = new DNode(2);
+        DNode node3 = new DNode(3);
+        list.InsertTail(node1);
+        list.InsertTail(node2);
+        list.InsertTail(node3);
+        assertEquals(node2, list.Search(node2));
+        assertEquals(null, list.Search(new DNode(4)));
+    }
+    @Test
+    public void testDeleteHead() {
+        // Create a new CSLL with nodes 1, 2, and 3
+        CSLL list = new CSLL();
+        list.SortedInsert(new DNode(2));
+        list.SortedInsert(new DNode(1));
+        list.SortedInsert(new DNode(3));
+
+        // Delete the head node (node 1)
+        list.DeleteHead();
+
+        // Check that the head node is now node 2
+        assertEquals(2, list.getHead().getData());
+
+        // Check that the list has size 2
+        assertEquals(2, list.getSize());
+    }
+    @Test
+    public void testDeleteTail() {
+        // Create a new CSLL with nodes 1, 2, and 3
+        CSLL list = new CSLL();
+        list.SortedInsert(new DNode(2));
+        list.SortedInsert(new DNode(1));
+        list.SortedInsert(new DNode(3));
+
+        // Delete the tail node (node 3)
+        list.DeleteTail();
+
+        // Check that the tail node is now node 2
+        assertEquals(2, list.getTail().getData());
+
+        // Check that the list has size 2
+        assertEquals(2, list.getSize());
+    }
+    @Test
+    public void testDelete() {
+        // Create a new CSLL with nodes 1, 2, and 3
+        CSLL list = new CSLL();
+        list.SortedInsert(new DNode(2));
+        list.SortedInsert(new DNode(1));
+        list.SortedInsert(new DNode(3));
+
+        // Delete the node with data 2
+        list.Delete(new DNode(2));
+
+        // Check that the list has size 2
+        assertEquals(2, list.getSize());
+
+        // Check that the list contains nodes 1 and 3 in that order
+        assertEquals(1, list.getHead().getData());
+        assertEquals(3, list.getTail().getData());
+    }
+
+    @Test
+    public void testDeleteHeadAgain() {
+        // Create a new CSLL with nodes 1, 2, and 3
+        CSLL list = new CSLL();
+        list.SortedInsert(new DNode(2));
+        list.SortedInsert(new DNode(1));
+        list.SortedInsert(new DNode(3));
+
+        // Delete the head node (node 1)
+        list.DeleteHead();
+
+        // Check that the head node is now node 2
+        assertEquals(2, list.getHead().getData());
+
+        // Check that the list has size 2
+        assertEquals(2, list.getSize());
+    }
 }
