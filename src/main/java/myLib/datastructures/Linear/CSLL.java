@@ -11,6 +11,28 @@ import myLib.datastructures.nodes.DNode;
 
 public class CSLL extends SLL{
 
+    @Override
+    public DNode getHead() {
+        return head;
+    }
+
+    public void setHead(DNode head) {
+        this.head = head;
+    }
+
+    @Override
+    public DNode getTail() {
+        return tail;
+    }
+
+    public void setTail(DNode tail) {
+        this.tail = tail;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     private DNode head;
     private DNode tail;
     private int size;
@@ -263,7 +285,7 @@ public class CSLL extends SLL{
      * @return true if the CSLL is sorted in ascending order, false otherwise
      */
     @Override
-    public boolean isSorted() {
+    public boolean IsSorted() {
         if (head == null) {
             return true;
         }
@@ -285,7 +307,7 @@ public class CSLL extends SLL{
     public void Print() {
         System.out.println("List length: " + size);
 
-        if (isSorted()) {
+        if (IsSorted()) {
             System.out.println("Sorted: Yes");
         } else {
             System.out.println("Sorted: No");

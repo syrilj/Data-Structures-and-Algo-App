@@ -153,7 +153,7 @@ public class App {
         list.Print(); // List length: 2 Sorted: Yes List content: 1 -> 3
 
         // Check if the list is sorted
-        System.out.println("Is the list sorted? " + list.isSorted()); // Is the list sorted? true
+        System.out.println("Is the list sorted? " + list.IsSorted()); // Is the list sorted? true
 
         // Sort the list
         list.Sort();

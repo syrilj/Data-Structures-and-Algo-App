@@ -52,7 +52,7 @@ public class SLL {
      @return the head node of the list
      */
     public DNode getHead() {
-        return this.head;
+        return head;
     }
     /**
 
@@ -60,7 +60,7 @@ public class SLL {
      @return the tail node of the list
      */
     public DNode getTail() {
-        return this.tail;
+        return tail;
     }
     /**
      Gets the number of nodes in the list.
@@ -196,7 +196,7 @@ public class SLL {
      * helper function to check if its is sorted
      * @return
      */
-    protected boolean isSorted(){
+    protected boolean IsSorted(){
         if (this.head == null || this.head.getNext() == null){
             return true;
         }
@@ -233,17 +233,13 @@ public class SLL {
      * Delete head of the list
      */
     public void DeleteHead() {
-        if (this.head == null) {
+        if (head == null) {
             return;
         }
-        if (this.head.getNext() == null) {
-            this.head = null;
-            this.tail = null;
-            this.tracker = 0;
-            return;
-        } else {
-            this.head = this.head.getNext();
-            this.tracker--;
+        head = head.getNext();
+        tracker--;
+        if (head == null) {
+            tail = null;
         }
     }
 
@@ -303,7 +299,7 @@ public class SLL {
      * Instead of tracking back the list
      */
     public void Sort() {
-        if (this.head == null || this.head.getNext() == null || this.isSorted()) {
+        if (this.head == null || this.head.getNext() == null || this.IsSorted()) {
             return;
         }
 
@@ -353,7 +349,7 @@ public class SLL {
      */
     public void Print() {
         System.out.println("List length: " + this.getLength());
-        System.out.println("Sort status: " + (isSorted() ? "Sorted" : "Unsorted"));
+        System.out.println("Sort status: " + (IsSorted() ? "Sorted" : "Unsorted"));
 
         DNode current = this.head;
         if (current == null) {
