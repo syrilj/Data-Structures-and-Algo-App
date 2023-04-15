@@ -1,4 +1,4 @@
-import myLib.Graphalgo.Graphalgo;
+import myLib.graphalgo.Graphalgo;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

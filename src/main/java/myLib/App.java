@@ -1,7 +1,7 @@
 package myLib;
 import java.util.Scanner;
 
-import myLib.Graphalgo.Graphalgo;
+import myLib.graphalgo.Graphalgo;
 import myLib.datastructures.Linear.StackLL;
 import myLib.datastructures.nodes.DNode;
 import myLib.datastructures.nodes.TNode;
@@ -26,7 +26,7 @@ public class App {
             System.out.println("7. Test Circular Singly Linked List (CSLL)");
             System.out.println("8. Test Binary Search Tree (BST)");
             System.out.println("9. Test AVL Tree (AVL)");
-            System.out.println("10. Test Max ra (MaxH)");
+            System.out.println("10. Test Max Heap (MaxH)");
             System.out.println("11. Test Min Heap (MinH)");
             System.out.println("12. Test Graph Structures");
             System.out.println("13. Exit");
@@ -181,33 +181,31 @@ public class App {
     private static void testCDLL() {
         System.out.println("-------------------------------------------------");
         System.out.println("Running functionality testing of CDLL");
-        // create a new CDLL
-        CDLL list = new CDLL();
+        // create a new CDLL with a head node
+        CDLL list = new CDLL(new DNode(10));
 
         // insert nodes into the list
-        list.InsertTail(new DNode(10));
         list.InsertTail(new DNode(20));
         list.InsertTail(new DNode(30));
-        list.InsertTail(new DNode(40));
-        list.Insert(new DNode(15), 3);
+        list.Insert(new DNode(15), 2);
         list.SortedInsert(new DNode(5));
 
-        System.out.println("Inserting 10, 20, 30, 40, 15, and 5 into the list...");
+        System.out.println("Inserting 20, 30, 15, and 5 into the list...");
 
         // print out the list
         list.Print();
 
-// delete nodes from the list
+        // delete nodes from the list
         list.DeleteHead();
         list.DeleteTail();
         list.Delete(new DNode(15));
 
         System.out.println("Deleting the head, tail, and node with value 15 from the list...");
 
-// print out the updated list
+        // print out the updated list
         list.Print();
 
-// search for a node in the list
+        // search for a node in the list
         DNode searchNode = new DNode(20);
         DNode foundNode = list.Search(searchNode);
 
@@ -217,61 +215,13 @@ public class App {
             System.out.println("Did not find node with value " + searchNode.getData() + " in the list.");
         }
 
-// sort the list
+        // sort the list
         list.Sort();
 
         System.out.println("Sorting the list...");
 
-// print out the sorted list
+        // print out the sorted list
         list.Print();
-
-// create a new CDLL with a head node
-        DNode headNode = new DNode(10);
-        CDLL myList = new CDLL(headNode);
-
-// insert nodes into the list
-        myList.InsertTail(new DNode(20));
-        myList.InsertTail(new DNode(30));
-        myList.Insert(new DNode(15), 2);
-        myList.SortedInsert(new DNode(5));
-
-        System.out.println("Inserting 20, 30, 15, and 5 into the list...");
-
-// print out the list
-        myList.Print();
-
-// delete nodes from the list
-        myList.DeleteHead();
-        myList.DeleteTail();
-        myList.Delete(new DNode(15));
-
-        System.out.println("Deleting the head, tail, and node with value 15 from the list...");
-
-// print out the updated list
-        myList.Print();
-
-// search for a node in the list
-        DNode searchNode2 = new DNode(20);
-        DNode foundNode2 = myList.Search(searchNode2);
-
-        if (foundNode2 != null) {
-            System.out.println("Found node with value " + searchNode2.getData() + " in the list.");
-        } else {
-            System.out.println("Did not find node with value " + searchNode2.getData() + " in the list.");
-        }
-
-        System.out.println("Sorting the list...");
-
-// sort the list
-        myList.Sort();
-
-// print out the sorted list
-        myList.Print();
-
-
-        myList.Clear();
-        System.out.println("Clearing the list... Should say List Content Empty");
-        myList.Print();
         System.out.println("-------------------------------------------------");
         System.out.println("Running functionality testing of CDLL");
 
@@ -281,35 +231,24 @@ public class App {
 
         System.out.println("-------------------------------------------------");
         System.out.println("Running functionality testing of DLL");
+// Test 1: Create a new DLL and insert nodes at head and tail
+        System.out.println("Test 1:");
+        DLL dll1 = new DLL(new DNode(0));
+        System.out.println("New DLL using overloaded constructor created.");
 
-        // Create a new DLL
-        DNode head = new DNode(0);
-        DLL dll1 = new DLL(head);
-        System.out.println("New DLL using overloaded constructor  created.");
-
-        // Insert nodes at head
         dll1.InsertHead(new DNode(9));
-        System.out.println("Inserted node with data = 9 at the head.");
         dll1.InsertHead(new DNode(4));
-        System.out.println("Inserted node with data = 4 at the head.");
         dll1.InsertHead(new DNode(18));
-        System.out.println("Inserted node with data = 18 at the head.");
-
-        // Insert nodes at tail
         dll1.InsertTail(new DNode(41));
-        System.out.println("Inserted node with data = 41 at the tail.");
         dll1.InsertTail(new DNode(51));
-        System.out.println("Inserted node with data = 51 at the tail.");
         dll1.InsertTail(new DNode(61));
-        System.out.println("Inserted node with data = 61 at the tail.");
+        System.out.println("Inserted nodes at head and tail.");
 
-        // Insert a node at a specific position
         int position1 = 6;
         dll1.Insert(new DNode(9), position1);
         System.out.println("Inserted node with data = 9 at position " + position1 + ".");
         dll1.Print();
 
-        // Search for a node
         DNode node = dll1.Search(new DNode(41));
         if (node != null) {
             System.out.println("Search result: Node with data = " + node.getData() + " found.");
@@ -317,75 +256,57 @@ public class App {
             System.out.println("Search result: Node with data = 41 not found.");
         }
 
-        // Delete a node
         DNode nodeToDelete = new DNode(9);
         dll1.Delete(nodeToDelete);
         System.out.println("Deleted node with data = " + nodeToDelete.getData() + ".");
 
-        // Sort the list
         dll1.Sort();
         System.out.println("List sorted in ascending order.");
-
-        // Print the list
         System.out.print("DLL content: ");
         dll1.Print();
 
-        // Clear the list
         dll1.Clear();
         System.out.println("List cleared.");
+        System.out.println("End of Test 1.");
+        System.out.println("-------------------------------------------------");
 
-
-
-// Create a new DLL
-        DLL dll = new DLL();
+        // Test 2: Create another new DLL and insert nodes at head and tail
+        System.out.println("Test 2:");
+        DLL dll2 = new DLL();
         System.out.println("New DLL created.");
 
-// Insert nodes at head
-        dll.InsertHead(new DNode(3));
-        System.out.println("Inserted node with data = 3 at the head.");
-        dll.InsertHead(new DNode(2));
-        System.out.println("Inserted node with data = 2 at the head.");
-        dll.InsertHead(new DNode(1));
-        System.out.println("Inserted node with data = 1 at the head.");
+        dll2.InsertHead(new DNode(3));
+        dll2.InsertHead(new DNode(2));
+        dll2.InsertHead(new DNode(1));
+        dll2.InsertTail(new DNode(4));
+        dll2.InsertTail(new DNode(5));
+        dll2.InsertTail(new DNode(6));
+        System.out.println("Inserted nodes at head and tail.");
 
-// Insert nodes at tail
-        dll.InsertTail(new DNode(4));
-        System.out.println("Inserted node with data = 4 at the tail.");
-        dll.InsertTail(new DNode(5));
-        System.out.println("Inserted node with data = 5 at the tail.");
-        dll.InsertTail(new DNode(6));
-        System.out.println("Inserted node with data = 6 at the tail.");
+        int position2 = 4;
+        dll2.Insert(new DNode(7), position2);
+        System.out.println("Inserted node with data = 7 at position " + position2 + ".");
+        dll2.Print();
 
-// Insert a node at a specific position
-        int position = 4;
-        dll.Insert(new DNode(7), position);
-        System.out.println("Inserted node with data = 7 at position " + position + ".");
-        dll.Print();
-
-// Search for a node
-        DNode node2 = dll.Search(new DNode(7));
+        DNode node2 = dll2.Search(new DNode(7));
         if (node2 != null) {
             System.out.println("Search result: Node with data = " + node2.getData() + " found.");
         } else {
             System.out.println("Search result: Node with data = 7 not found.");
         }
 
-// Delete a node
         DNode nodeToDelete2 = new DNode(2);
-        dll.Delete(nodeToDelete2);
-        System.out.println("Deleted node with data = " + nodeToDelete.getData() + ".");
+        dll2.Delete(nodeToDelete2);
+        System.out.println("Deleted node with data = " + nodeToDelete2.getData() + ".");
 
-// Sort the list
-        dll.Sort();
+        dll2.Sort();
         System.out.println("List sorted in ascending order.");
-
-// Print the list
         System.out.print("DLL content: ");
-        dll.Print();
+        dll2.Print();
 
-// Clear the list
-        dll.Clear();
+        dll2.Clear();
         System.out.println("List cleared.");
+        System.out.println("End of Test 2.");
         System.out.println("-------------------------------------------------");
         System.out.println("Finished running functionality testing of DLL.");
     }

@@ -92,31 +92,42 @@ public class CDLL extends DLL{
      *
      * @param node the node to delete from the CDLL
      */
-
-    public void Delete(DNode node) {
-        DNode nodeToDelete = this.Search(node);
-        if (nodeToDelete == null) {
-            return;
+@Override
+public void Delete(DNode node) {
+    DNode nodeToDelete = this.Search(node);
+    if (nodeToDelete == null) {
+        return;
+    }
+    if (head == null) {
+        return;
+    } else if (head == tail) {
+        if (head == node) {
+            head = tail = null;
+            tracker--;
         }
-        if (head == null) {
-            return;
-        } else if (head == tail) {
-            if (head == node) {
-                head = tail = null;
-                tracker--;
+    } else {
+        DNode current = head;
+        while (current.getNext() != head && current.getNext() != nodeToDelete) {
+            current = current.getNext();
+        }
+        if (current.getNext() == nodeToDelete) {
+            current.setNext(nodeToDelete.getNext());
+            nodeToDelete.getNext().setPrevious(current);
+            if (nodeToDelete == head) {
+                head = nodeToDelete.getNext();
             }
-        } else {
-            DNode current = head;
-            while (current != tail && current.getNext() != node) {
-                current = current.getNext();
+            if (nodeToDelete == tail) {
+                tail = nodeToDelete.getPrevious();
             }
-            if (current.getNext() == node) {
-                current.setNext(node.getNext());
-                node.getNext().setPrevious(current);
-                tracker--;
-            }
+            nodeToDelete.setNext(null);
+            nodeToDelete.setPrevious(null);
+            tracker--;
         }
     }
+}
+
+
+
 
 
 

@@ -150,7 +150,7 @@ public class DLL {
      * @return the node if found, or null if not found
      */
     public DNode Search(DNode node) {
-        DNode present = head;
+        DNode present =getHead();
         while (present != null) {
             if (present.getData() == node.getData()) {
                 return present;
@@ -159,6 +159,8 @@ public class DLL {
         }
         return null;
     }
+
+
     /**
      * Deletes the head node of the list.
      */
@@ -199,6 +201,7 @@ public class DLL {
      *
      * @param node the node to be deleted
      */
+
     public void Delete(DNode node) {
         if (head == null) {
             return;
@@ -207,37 +210,21 @@ public class DLL {
         if (nodeToDelete == null) {
             return;
         }
-        if (head == node) {
-            head = node.getNext();
-            if (head != null) {
-                head.setPrevious(null);
-            } else {
-                tail = null;
-            }
-            node.setNext(null);
-            count--;
-            return;
+        if (nodeToDelete == head) {
+            head = nodeToDelete.getNext();
+        } else {
+            nodeToDelete.getPrevious().setNext(nodeToDelete.getNext());
         }
-        if (tail == node) {
-            tail = node.getPrevious();
-            tail.setNext(null);
-            node.setPrevious(null);
-            count--;
-            return;
+        if (nodeToDelete == tail) {
+            tail = nodeToDelete.getPrevious();
+        } else {
+            nodeToDelete.getNext().setPrevious(nodeToDelete.getPrevious());
         }
-        DNode current = head.getNext();
-        while (current != null) {
-            if (current == node) {
-                current.getPrevious().setNext(current.getNext());
-                current.getNext().setPrevious(current.getPrevious());
-                current.setPrevious(null);
-                current.setNext(null);
-                count--;
-                return;
-            }
-            current = current.getNext();
-        }
+        nodeToDelete.setNext(null);
+        nodeToDelete.setPrevious(null);
+        count--;
     }
+
 
     /**
      * Returns true if the list is sorted.
